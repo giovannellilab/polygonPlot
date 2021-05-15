@@ -42,20 +42,20 @@ While working on the review I started trying to put on the same plot multiple ra
 
 Searching the web I found [forest plot](https://en.wikipedia.org/wiki/Forest_plot), which in essence are a simplified form of bloxplot were the range is represented by a single line. The result is a series of parallel line (thus reducing the amount of ink, but also the amount of information reported) essentially suffering the same problems of the boxplot.
 
-<img src="forest_plot.png" class="img-responsive" alt="forest-plot-example">
+<img src="images/forest_plot.png" class="img-responsive" alt="forest-plot-example">
 > My planetary and life data used for the Merino et al. 2019 paper visualized as a Forest plot.
 
 The type of comparison I was looking for was similar to the information displayed by a [spider chart](https://en.wikipedia.org/wiki/Radar_chart) (called also polar chart, radar chart or star plot among many other names). While not one of my favorite, spider chart are useful to visualize multivariate data in a single plot, and give more intuitive comparison of the distribution of the data among different variables between different plots. The problem arises when for each variable you don't want just to plot a single value, but you want to show the data range (like minimum and maximum), or a combination of range and average.
 
-<img src="spider_chart.png" class="img-responsive" alt="spider-plot-example">
+<img src="images/spider_chart.png" class="img-responsive" alt="spider-plot-example">
 > The same data as above plotted as spider plots plot. Ranges are difficult to visualize and sometimes impossible to plot, depending on the variable's order.
 
 I started doodling through a series of option, and devising a series of rules. Soon I started converging on the idea that polygons were the best solution to visualize ranges for n-variables.
 
-<img src="inception1.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50" height="50">
-<img src="inception2.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50" height="50">
-<img src="inception3.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50" height="50">
-<img src="inception4.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50" height="50">
+<img src="images/inception1.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50" height="50">
+<img src="images/inception2.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50" height="50">
+<img src="images/inception3.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50" height="50">
+<img src="images/inception4.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50" height="50">
 
 ### Reading the Polygon plot
 
