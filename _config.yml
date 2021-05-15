@@ -1,6 +1,6 @@
 theme: jekyll-theme-minimal
 title: the Polygons plot
-description: Description of Polygons plot to visualize multivariate ranges
+description: Welcome to the repository describing the multivariate range visualization Polygons plot! Polygons plot are designed to show 3 to 6 variables simultaneously showcase the min-max and average for each. Polygons plot have been ideated by Donato Giovannelli. Visit Donato Giovannelli laboratory website at [www.donatogiovannelli.com](htpps://www.donatogiovannelli.com).
 logo: images/polygons_plot_logo.png
-show_downloads: true
+show_downloads: false
 google_analytics: G-193ZJ31TZB
