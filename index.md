@@ -1,8 +1,8 @@
-## Welcome to GitHub Pages
+## Here comes the Polygons Plot
 
-You can use the [editor on GitHub](https://github.com/giovannellilab/polygonsplot/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+In case you have not had enough plot and chart types, here come a new one: the polygons plot. The Polygons plot is designed to visualize multivariate ranges as opposite to single data points. I have developed the concept for the polygons plot in late 2018 while working on our review [Living at the Extremes: Extremophiles and the Limits of Life in a Planetary Context](https://www.frontiersin.org/articles/10.3389/fmicb.2019.00780/full), published in 2019 in Frontiers in Microbiology. While working on the review, I started collecting data regarding the range (minimum and maximum) for physico-chemical parameters of Earth's life such as pH, temperature, salinity and pressure. I wanted to visualize the ranges of these variables in a single plot, but I could not find a simple way to do it. After some research and a lot of doodling, the polygons plot was born!
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+[!Merino_et_al_2019_polygon_plot](https://www.frontiersin.org/files/Articles/447668/fmicb-10-00780-HTML-r2/image_m/fmicb-10-00780-g002.jpg)
 
 ### Markdown
 
