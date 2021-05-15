@@ -52,10 +52,10 @@ The type of comparison I was looking for was similar to the information displaye
 
 I started doodling through a series of option, and devising a series of rules. Soon I started converging on the idea that polygons were the best solution to visualize ranges for n-variables.
 
-<img src="images/inception1.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50" height="50">
-<img src="images/inception2.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50" height="50">
-<img src="images/inception3.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50" height="50">
-<img src="images/inception4.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50" height="50">
+<img src="images/inception1.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="30%">
+<img src="images/inception2.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50%">
+<img src="images/inception3.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50">
+<img src="images/inception4.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50">
 
 ### Reading the Polygon plot
 
