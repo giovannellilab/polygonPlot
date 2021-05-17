@@ -55,15 +55,15 @@ The type of comparison I was looking for was similar to the information displaye
 
 I started doodling through a series of option, and devising a series of rules. Soon I started converging on the idea that polygons were the best solution to visualize ranges for n-variables.
 
-<img src="images/inception1.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50%">
-<img src="images/inception2.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50%">
-<img src="images/inception3.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50%">
-<img src="images/inception4.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="50%">
+<img src="images/inception1.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="40%">
+<img src="images/inception2.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="40%">
+<img src="images/inception3.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="40%">
+<img src="images/inception4.jpg" class="img-responsive" alt="doodling-the-polygon-plot" width="40%">
 
 ### Reading the Polygon plot
 Reading a polygon plot is easy. The plot has 3 to 6 axis representing the different variables to be visualized. The range (for example minimum-maximum values) are plotted as a segment parallel to its corresponding axis. The different segments are linked together to form a polygon. The resulting polygon might have up to 2x the variable number. This is due to an arbitrary space inserted between the different axis to improve readability and avoid plotting artifacts (called offset). Single values are plotted as a point (vertex), while missing value are represented by a missing edge on the data polygon. The multivariate space is defined by the resulting polygon. The mean for each variable can be represented by a single point and connected by a line.
 
-**A word of caution**: The multivariate space defined in the 2D plane by the polygon plot does not define the state space of the possible combinations of the visualized variables. Thinking of the polygon plot as the state space of possible instances might seem like an intuitive thing to do, but it is inherently _**wrong**_! You are have been warned!  
+> **A word of caution**: The multivariate space defined in the 2D plane by the polygon plot does not define the state space of the possible combinations of the visualized variables. Thinking of the polygon plot as the state space of possible instances might seem like an intuitive thing to do, but it is inherently _**wrong**_! You are have been warned!  
 
 <img src="images/reading_polygon_plot.png" class="img-responsive" alt="reading_a_polygon_plot">
 > Anatomy of a polygon plot, with all the main characteristic explained.
@@ -100,7 +100,7 @@ Here an overgrowing list of possible features to be included in the R packages w
 
 
 ### How to cite the Polygon plot
-We are currently working on a paper to describe the Polygon plot more formally, and we will post the apporoapriate citation here soon. Come back to take a look in a few months (I know, we are veryyyy slow!). Meanwhile, in case you have found the polygon plot useful, please consider using the two following citations:
+We are currently working on a paper to describe the Polygon plot more formally, and we will post the apporoapriate citation here soon. Come back to take a look in a few months (I know, we are veeeeeery slow!). Meanwhile, in case you have found the polygon plot useful, please consider using the two following citations:
 
 Giovannelli, D., Morrison, S.M., Prabhu, A., Huang, F. (2021). Polygons plot: a new aesthetics for visualizing multivariate data. GitHub, doi:10.   
 
