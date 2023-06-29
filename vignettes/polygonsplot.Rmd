@@ -1,0 +1,138 @@
+---
+title: "polygonsplot"
+author: 
+  - name: Davide Corso
+    affiliation:
+    - University of Naples Federico II
+    email: davidecrs92@gmail.com
+output: 
+  BiocStyle::html_document:
+    self_contained: yes
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    code_folding: show
+date: "`r doc_date()`"
+package: "`r pkg_ver('polygonsplot')`"
+vignette: >
+  %\VignetteIndexEntry{polygonsplot}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}  
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    crop = NULL ## Related to https://stat.ethz.ch/pipermail/bioc-devel/2020-April/016656.html
+)
+```
+
+# Introduction
+
+Polygons Plot is designed to visualize multivariate ranges as opposite to single
+data points and it is able to show 3 to 6 variables simultaneously showcase the 
+min-max and average for each. The concept of _polygons plot_ was developed by 
+[Donato Giovannelli](https://www.donatogiovannelli.com/).
+
+# Installation
+
+You can install `r BiocStyle::Biocpkg("polygonsplot")` from *Bioconductor* with the
+following code:
+
+```{r, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager")
+}
+BiocManager::install("polygonsplot")
+```
+
+
+# Usage
+
+```{r library}
+library(polygonsplot)
+```
+
+To use the `polygonsplot` package, there are just two mandatory parameters: 
+- the input `data.frame` 
+- the shape (`integer`, 3=Triangle, 4=Square, 5=Pentagon, 6=Hexagon)
+
+
+```{r load-data}
+df <- read.csv(system.file(file.path("extdata", "example.csv"), package="polygonsplot"))
+df
+```
+## Shape: 3 - Triangle
+
+```{r fig.width=7, fig.height=7 }
+plot_triangle <- polygonplot(df, shape = 3, fillcolor = "#e56b6f", linecolor = "#b56576")
+plot_triangle
+```
+
+## Shape: 4 - Square
+
+```{r fig.width=7, fig.height=7 }
+plot_square <- polygonplot(df, shape = 4, fillcolor = "#57cc99", linecolor = "#38a3a5")
+plot_square
+```
+
+## Shape: 5 - Pentagon
+
+```{r fig.width=7, fig.height=7}
+plot_pentagon <- polygonplot(df, shape = 5, fillcolor = "#c89f9c", linecolor = "#b36a5e")
+plot_pentagon
+```
+
+## Shape: 6 - Hexagon
+
+```{r fig.width=7, fig.height=7}
+plot_hexagon <- polygonplot(df, shape = 6, fillcolor = "#0077b6", linecolor = "#023e8a")
+plot_hexagon
+```
+
+
+## Input `data.frame` description
+
+The input `data.frame` should be composed as follows:
+- The first column should contain the strings `axis_min`, `axis_max` and `data` 
+in that row order.
+- All the columns, starting from the second, must be dedicated to the variables
+of interest. In particular, the first two rows should contain the values for the 
+`axis_min` and `axis_max` respectively. If left empty, the 
+axis_min/max will be automatically calculated based on data given and 
+extension will be decided based on the Axes range extension 
+(`extra` parameter).
+Starting from the third row, each variable column must contain all the data values.
+- Column names will be used as labels of the axis 
+(starting from the second one). Change them in order to change the labels, 
+but don't leave them empty.
+
+### Usage with a minimal example
+```{r load-data-minimal}
+
+df_min <- read.csv(system.file(file.path("extdata", "minimal_example.csv"), package="polygonsplot"))
+df_min
+```
+
+```{r fig.width=7, fig.height=7}
+plot_min <- polygonplot(df_min, shape = 6, fillcolor = "#f4d58d", linecolor = "#8d0801")
+plot_min
+```
+
+The `polygonplot` function return a `ggplot2` object. 
+`NOTE`: If you are going to change the theme of the returned ggplot object, it is
+highly suggested to specify in the `theme` function the `aspect.ration = 1` in 
+order to keep the text and the relative ticks aligned on the axis.
+
+
+# `sessionInfo` {-}
+
+<details><summary>Session info</summary>
+
+```{r session_info, echo=FALSE, cache=FALSE}
+Sys.time()
+sessionInfo()
+```
+
+</details>
