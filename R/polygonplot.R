@@ -1,24 +1,52 @@
 #' Draw polygon plot
 #'
-#' @param df data.frame with all the axis values
-#' @param shape string to specify the shape of the polygon (Triangle, Square, Pentagon, Hexagon)
+#' @param df data.frame containing the data. The first column of the dataframe
+#' must contain the strings `axis_min`, `axis_max` and `data` in that order.
+#' `axis_min` and `axis_max` are for the axis ranges. If left empty, the 
+#' axis_min/max will be automatically calculated based on data given and 
+#' extension will be decided based on the Axes range extension 
+#' (`extra` parameter).
+#' From the second column to the last, they need to contains the value 
+#' of `axis_min`, `axis_max`, and `data` for all the variables of interest. 
+#' From the third row, each cell can contain data values for the corresponding
+#' column variable. Column names will be used as labels of the axis 
+#' (starting from the second one). Change them in order to change the labels, 
+#' but don't leave them empty. 
+#' @param shape integer value to specify the shape of the polygon (3=Triangle, 
+#' 4=Square, 5=Pentagon, 6=Hexagon)
 #' @param extra axis range extension
-#' @param fillcolor fill color
-#' @param alpha alpha value
-#' @param linecolor line color
-#' @param linetype line type
-#' @param lwd linewidth
-#' @param title title
+#' @param fillcolor fill color of the polygon
+#' @param alpha alpha value of the fill color
+#' @param linecolor line color of the polygon border
+#' @param linetype line type of the polygon border
+#' @param lwd line width of the polygon border
+#' @param title title of the plot
+#' @param fix_aspect_ratio Boolean flag to fix the aspect ratio of the plot as 
+#' `1`. Highly suggested to leave it as default value `TRUE`. NOTE: If you are 
+#' going to change the theme of the returned ggplot object, remember to put in 
+#' the `theme` function the following code `aspect.ration = 1` in order to 
+#' keep the text and the relative ticks aligned on the axis.
 #'
 #'
 #' @return A `ggplot2` object.
+#' 
+#' 
+#' @examples
+#' df <- data.frame(
+#'   info=c("axis_min", "axis_max", "data", ""),
+#'   data1=c(-300, 500, 300, 350),
+#'   data2=c(4, 14, -2, 12),
+#'   data3=c(0, 1000, 10, 50),
+#'   data4=c(0, 50, 20, 40)
+#' )
+#' 
+#' p <- polygonplot(df, shape=4, fillcolor = "dodgerblue", linecolor = "blue")
+#' p 
 #'
 #' @import checkmate
 #' @export
 polygonplot <- function(df, shape, 
                         extra = 0.5,
-                        axis_order = list("axis1" = 1, "axis2" = 2, "axis3" = 3, 
-                                     "axis4" = 4, "axis5" = 5, "axis6" = 6),
                         fillcolor = "black", 
                         alpha = 0.5,
                         linecolor = "black", 
@@ -28,21 +56,17 @@ polygonplot <- function(df, shape,
                         fix_aspect_ratio = TRUE){
   
   # Check params type
+  checkmate::assertNamed(df, type = "named")
   checkmate::assertInt(shape, lower = 3, upper = 6)
   checkmate::assertDouble(extra, lower = 0, upper = 1)
-  checkmate::assertList(axis_order, types = "numeric")
-  axis_check_names <- c()
-  for (i in seq.int(1, shape)) {
-    axis_check_names <- c(axis_check_names, paste0("axis", i))
-  }
-  checkmate::assertNames(names(axis_order), must.include = axis_check_names)
   checkmate::assertDouble(alpha, lower = 0, upper = 1)
   checkmate::assertChoice(linetype, c("blank", "solid", "dashed", "dotted", 
                                       "dotdash", "longdash", "twodash"))
   checkmate::assertDouble(lwd)
   checkmate::assertFlag(fix_aspect_ratio)
   
-  
+  axis_order = list("axis1" = 1, "axis2" = 2, "axis3" = 3, 
+                    "axis4" = 4, "axis5" = 5, "axis6" = 6)
 
   adj_shape <- shape+1
 
