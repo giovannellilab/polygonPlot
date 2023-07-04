@@ -6,6 +6,4 @@
 .quarto
 .DS_Store
 .httr-oauth
-.git
 inst/doc
-polygonsplot.Rproj
