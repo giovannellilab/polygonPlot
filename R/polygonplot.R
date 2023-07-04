@@ -22,9 +22,9 @@
 #' @param lwd line width of the polygon border
 #' @param title title of the plot
 #' @param fix_aspect_ratio Boolean flag to fix the aspect ratio of the plot as 
-#' `1`. Highly suggested to leave it as default value `TRUE`. NOTE: If you are 
+#' `1`. It is strongly recommended to leave it as default value `TRUE`. NOTE: If you are 
 #' going to change the theme of the returned ggplot object, remember to put in 
-#' the `theme` function the following code `aspect.ration = 1` in order to 
+#' the `theme` function the following code `aspect.ratio = 1` in order to 
 #' keep the text and the relative ticks aligned on the axis.
 #'
 #'
