@@ -15,6 +15,9 @@ Limits of Life in a Planetary
 Context](https://doi.org/10.3389/fmicb.2019.00780), published in 2019 in
 Frontiers in Microbiology.
 
+A complete explanation of how polygon plot works can be found at
+<https://giovannellilab.github.io/polygonPlot/>.
+
 <details>
 <summary>
 Story Details

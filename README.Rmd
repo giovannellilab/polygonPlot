@@ -24,6 +24,11 @@ knitr::opts_chunk$set(
 A **Polygon plot** (singular, Polygons plot, plural) is designed to visualize multivariate ranges as opposite to single data points. The concept of `polygons plot` was developed by [Donato Giovannelli](https://www.donatogiovannelli.com/) in late 2018 while working on our review [Living at the Extremes: Extremophiles and the Limits of Life in a Planetary Context](https://doi.org/10.3389/fmicb.2019.00780), published in 2019 in Frontiers in Microbiology.
 
 
+
+A complete explanation of how polygon plot works can be found at
+<https://giovannellilab.github.io/polygonPlot/>.
+
+
 <details>
 <summary>Story Details</summary>
 
@@ -33,7 +38,6 @@ While working on the review, he started collecting data regarding the range (min
 <img src="https://www.frontiersin.org/files/Articles/447668/fmicb-10-00780-HTML-r2/image_m/fmicb-10-00780-g002.jpg" class="img-responsive" alt="Merino_et_al_2019_polygon_plot">
 
 </details>
-
 
 ## Installation
 
