@@ -4,6 +4,8 @@
 # polygonPlot
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/giovannellilab/polygonPlot/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovannellilab/polygonPlot/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 A **Polygon plot** (singular, Polygons plot, plural) is designed to
