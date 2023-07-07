@@ -13,6 +13,7 @@ polygonplot(
   linecolor = "black",
   linetype = "solid",
   lwd = 0.8,
+  labels_axis = NULL,
   title = "Polygon Plot",
   fix_aspect_ratio = TRUE
 )
@@ -46,12 +47,14 @@ but don't leave them empty.}
 
 \item{lwd}{line width of the polygon border}
 
+\item{labels_axis}{vector with the desired labels of the axis}
+
 \item{title}{title of the plot}
 
 \item{fix_aspect_ratio}{Boolean flag to fix the aspect ratio of the plot as
-\code{1}. Highly suggested to leave it as default value \code{TRUE}. NOTE: If you are
+\code{1}. It is strongly recommended to leave it as default value \code{TRUE}. NOTE: If you are
 going to change the theme of the returned ggplot object, remember to put in
-the \code{theme} function the following code \code{aspect.ration = 1} in order to
+the \code{theme} function the following code \code{aspect.ratio = 1} in order to
 keep the text and the relative ticks aligned on the axis.}
 }
 \value{

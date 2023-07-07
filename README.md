@@ -1,20 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Polygons plot
+# polygonPlot
 
 <!-- badges: start -->
-
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-<!-- [![Bioc release status](http://www.bioconductor.org/shields/build/release/bioc/polygonsplot.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/polygonsplot)  -->
-<!-- [![Bioc devel status](http://www.bioconductor.org/shields/build/devel/bioc/polygonsplot.svg)](https://bioconductor.org/checkResults/devel/bioc-LATEST/polygonsplot)  -->
-<!-- [![Bioc downloads rank](https://bioconductor.org/shields/downloads/release/polygonsplot.svg)](http://bioconductor.org/packages/stats/bioc/polygonsplot/)  -->
-<!-- [![Bioc support](https://bioconductor.org/shields/posts/polygonsplot.svg)](https://support.bioconductor.org/tag/polygonsplot)  -->
-<!-- [![Bioc history](https://bioconductor.org/shields/years-in-bioc/polygonsplot.svg)](https://bioconductor.org/packages/release/bioc/html/polygonsplot.html#since)  -->
-<!-- [![Bioc last commit](https://bioconductor.org/shields/lastcommit/devel/bioc/polygonsplot.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/polygonsplot/)  -->
-<!-- [![Bioc dependencies](https://bioconductor.org/shields/dependencies/release/polygonsplot.svg)](https://bioconductor.org/packages/release/bioc/html/polygonsplot.html#since) -->
-
 <!-- badges: end -->
 
 A **Polygon plot** (singular, Polygons plot, plural) is designed to
@@ -42,104 +31,43 @@ doodling, the polygons plot was born!
 
 </details>
 
-## Installation instructions
+## Installation
 
-Get the latest stable `R` release from
-[CRAN](http://cran.r-project.org/). Then install `polygonsplot` from
-[Bioconductor](http://bioconductor.org/) using the following code:
+You can install the development version of polygonPlot from
+[GitHub](https://github.com/giovannellilab/polygonPlot) with:
 
 ``` r
-if (!requireNamespace("BiocManager", quietly = TRUE)) {
-    install.packages("BiocManager")
-}
-
-BiocManager::install("polygonsplot")
+# install.packages("devtools")
+devtools::install_github("giovannellilab/polygonPlot")
 ```
 
-The development version of **polygonsplot** can be installed from
-[GitHub](https://github.com/giovannellilab/polygonsplot) with:
-
-``` r
-if (!requireNamespace("BiocManager", quietly = TRUE)) {
-    install.packages("BiocManager")
-    
-BiocManager::install("giovannellilab/polygonsplot")
-
-## Example
+## Example usage
 
 This is a basic example which shows you how to solve a common problem:
+
+``` r
+library(polygonPlot)
+
+df <- read.csv(system.file(file.path("extdata", "example.csv"), package="polygonPlot"))
+df
+#>        info data1 data2 data3 data4 data5 data6
+#> 1  axis_min  -300    -4     0     0    NA  -0.5
+#> 2  axis_max   500    14  1000    50    NA   0.5
+#> 3      data   300    -2    10    20     5   0.1
+#> 4             320    12    50    40    10   0.3
+#> 5             340    NA    90    NA    NA    NA
+#> 6             360    NA   130    NA    NA    NA
+#> 7             380    NA   170    NA    NA    NA
+#> 8             400    NA   210    NA    NA    NA
+#> 9             420    NA    NA    NA    NA    NA
+#> 10            440    NA    NA    NA    NA    NA
+#> 11            460    NA    NA    NA    NA    NA
 ```
 
 ``` r
-library("polygonsplot")
-## basic example code
+plot <- polygonplot(df, shape = 4, fillcolor = "#57cc99", linecolor = "#38a3a5",
+                    labels_axis = c("Earth", "Mercury", "Venus", "Mars"))
+plot
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub!
-
-## Citation
-
-Below is the citation output from using `citation('polygonsplot')` in R.
-Please run this yourself to check for any updates on how to cite
-**polygonsplot**.
-
-``` r
-# print(citation('polygonsplot'), bibtex = TRUE)
-```
-
-Please note that the `polygonsplot` was only made possible thanks to
-many other R and bioinformatics software authors, which are cited either
-in the vignettes and/or the paper(s) describing this package.
-
-## Code of Conduct
-
-Please note that the `polygonsplot` project is released with a
-[Contributor Code of
-Conduct](http://bioconductor.org/about/code-of-conduct/). By
-contributing to this project, you agree to abide by its terms.
-
-## Development tools
-
-- Continuous code testing is possible thanks to [GitHub
-  actions](https://www.tidyverse.org/blog/2020/04/usethis-1-6-0/)
-  through *[usethis](https://CRAN.R-project.org/package=usethis)*,
-  *[remotes](https://CRAN.R-project.org/package=remotes)*, and
-  *[rcmdcheck](https://CRAN.R-project.org/package=rcmdcheck)* customized
-  to use [Bioconductor’s docker
-  containers](https://www.bioconductor.org/help/docker/) and
-  *[BiocCheck](https://bioconductor.org/packages/3.17/BiocCheck)*.
-- Code coverage assessment is possible thanks to
-  [codecov](https://codecov.io/gh) and
-  *[covr](https://CRAN.R-project.org/package=covr)*.
-- The code is styled automatically thanks to
-  *[styler](https://CRAN.R-project.org/package=styler)*.
-- The documentation is formatted thanks to
-  *[devtools](https://CRAN.R-project.org/package=devtools)* and
-  *[roxygen2](https://CRAN.R-project.org/package=roxygen2)*.
-
-For more details, check the `dev` directory.
-
-This package was developed using
-*[biocthis](https://bioconductor.org/packages/3.17/biocthis)*.
+<img src="man/figures/README-plot-1.png" width="100%" />
