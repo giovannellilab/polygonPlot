@@ -20,6 +20,7 @@
 #' @param linecolor line color of the polygon border
 #' @param linetype line type of the polygon border
 #' @param lwd line width of the polygon border
+#' @param labels_axis vector with the desired labels of the axis
 #' @param title title of the plot
 #' @param fix_aspect_ratio Boolean flag to fix the aspect ratio of the plot as 
 #' `1`. It is strongly recommended to leave it as default value `TRUE`. NOTE: If you are 
@@ -52,6 +53,7 @@ polygonplot <- function(df, shape,
                         linecolor = "black", 
                         linetype = "solid", 
                         lwd = 0.8, 
+                        labels_axis = NULL,
                         title = "Polygon Plot", 
                         fix_aspect_ratio = TRUE){
   
@@ -63,6 +65,7 @@ polygonplot <- function(df, shape,
   checkmate::assertChoice(linetype, c("blank", "solid", "dashed", "dotted", 
                                       "dotdash", "longdash", "twodash"))
   checkmate::assertDouble(lwd)
+  checkmate::assertCharacter(labels_axis, len = shape, null.ok = TRUE)
   checkmate::assertFlag(fix_aspect_ratio)
   
   axis_order = list("axis1" = 1, "axis2" = 2, "axis3" = 3, 
@@ -112,11 +115,18 @@ polygonplot <- function(df, shape,
           }
       }
   }
-  # Names for each dataset
+  
   axis_labels <- c()
-  for (i in seq.int(2,adj_shape)) {
+  # Names for each dataset
+  if (is.null(labels_axis)) {
+    for (i in seq.int(2,adj_shape)) {
       axis_labels <- c(axis_labels, names(df)[i])
+    }
+  } else {
+    axis_labels <- labels_axis
   }
+  
+  
 
   # Calculate ticks for each axis and return NA if min/max range not available
   ticks <- list()
