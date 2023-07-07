@@ -6,6 +6,11 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/giovannellilab/polygonPlot/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovannellilab/polygonPlot/actions/workflows/R-CMD-check.yaml)
+[![Project Status: Active - The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![License:
+MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
 <!-- badges: end -->
 
 A **Polygon plot** (singular, Polygons plot, plural) is designed to
