@@ -9,6 +9,10 @@ author:
     affiliation:
     - University of Naples Federico II
     email: donato.giovannelli@unina.it
+  - name: Anirudh Prabhu
+    affiliation:
+    - Carnegie Institution for Science
+    email: aprabhu@carnegiescience.edu
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{polygonPlot}
