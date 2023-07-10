@@ -58,8 +58,9 @@ polygonplot <- function(df, shape,
                         fix_aspect_ratio = TRUE){
   
   # Check params type
-  checkmate::assertNamed(df, type = "named")
   checkmate::assertInt(shape, lower = 3, upper = 6)
+  checkmate::assertDataFrame(df, ncols = 1+shape, col.names = "named")
+  
   checkmate::assertDouble(extra, lower = 0, upper = 1)
   checkmate::assertDouble(alpha, lower = 0, upper = 1)
   checkmate::assertChoice(linetype, c("blank", "solid", "dashed", "dotted", 
