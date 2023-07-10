@@ -5,14 +5,16 @@ author:
     affiliation:
     - University of Naples Federico II
     email: davidecrs92@gmail.com
-  - name: Donato Giovannelli
-    affiliation:
-    - University of Naples Federico II
-    email: donato.giovannelli@unina.it
+  - name: Fang Huang
+    email: fanghuang007@gmail.com
   - name: Anirudh Prabhu
     affiliation:
     - Carnegie Institution for Science
     email: aprabhu@carnegiescience.edu
+  - name: Donato Giovannelli
+    affiliation:
+    - University of Naples Federico II
+    email: donato.giovannelli@unina.it
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{polygonPlot}
