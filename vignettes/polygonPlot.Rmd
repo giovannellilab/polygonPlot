@@ -6,6 +6,8 @@ author:
     - University of Naples Federico II
     email: davidecrs92@gmail.com
   - name: Fang Huang
+    affiliation:
+    - CSIRO Mineral Resources, Australia
     email: fanghuang007@gmail.com
   - name: Anirudh Prabhu
     affiliation:
