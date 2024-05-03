@@ -154,8 +154,7 @@ polygonplot <- function(df, shape,
                  linetype, lwd, title)
   }
   else if (shape == 5) {
-    p <- .pentagon(df,
-                   axis_order,
+    p <- .pentagon(axis_order,
                    ticks,
                    min_range, max_range,
                    mindata, maxdata,
