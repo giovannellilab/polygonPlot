@@ -117,12 +117,15 @@
   p <- p + ggplot2::geom_line(data = df_coord_axis,
                               aes(x=x_line1, y=y_line1),
                               show.legend = FALSE)
+
   p <- p + ggplot2::geom_line(data = df_coord_axis,
                               aes(x=x_line2, y=y_line2),
                               show.legend = FALSE)
+
   p <- p + ggplot2::geom_line(data = df_coord_axis,
                               aes(x=x_line3, y=y_line3),
                               show.legend = FALSE)
+                              
   p <- p + ggplot2::geom_line(data = df_coord_axis,
                               aes(x=x_line4, y=y_line4),
                               show.legend = FALSE)
@@ -231,23 +234,5 @@
       }
   }
 
-  # Add title and remove figure backgrounds
-  # p <- p + ggplot2::ggtitle(title)
-  # +
-  #   ggplot2::theme(plot.title = element_text(size=16, face='bold',hjust=0.5),
-  #                    axis.line=element_blank(),
-  #                    axis.text.x=element_blank(),
-  #                    axis.text.y=element_blank(),
-  #                    axis.ticks=element_blank(),
-  #                    axis.title.x=element_blank(),
-  #                    plot.margin = margin(20,20,20,20),
-  #                    axis.title.y=element_blank(),
-  #                    legend.position="none",
-  #                    panel.background=element_blank(),
-  #                    panel.border=element_blank(),
-  #                    panel.grid.major=element_blank(),
-  #                    panel.grid.minor=element_blank(),
-  #                    plot.background=element_blank())
-  #
   return(p)
 }
