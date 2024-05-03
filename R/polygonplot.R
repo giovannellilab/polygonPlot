@@ -144,17 +144,15 @@ polygonplot <- function(df, shape,
                    axis_labels,
                    fillcolor, alpha, linecolor,
                    linetype, lwd, title)
-
-  } else if (shape == 4){
-    p <- .square(df,
-                 axis_order,
+  } 
+  else if (shape == 4){
+    p <- .square(axis_order,
                  ticks,
                  min_range, max_range,
                  mindata, maxdata,
                  axis_labels,
                  fillcolor, alpha, linecolor,
                  linetype, lwd, title)
-
   }
   else if (shape == 5) {
     p <- .pentagon(df,
@@ -165,7 +163,6 @@ polygonplot <- function(df, shape,
                    axis_labels,
                    fillcolor, alpha, linecolor,
                    linetype, lwd, title)
-
   }
   else {
     p <- .hexagon(df,
@@ -176,10 +173,9 @@ polygonplot <- function(df, shape,
                   axis_labels,
                   fillcolor, alpha, linecolor,
                   linetype, lwd, title)
-
   }
   
-  p <- p + .clean_theme()
+  p <- p + ggplot2::theme_void()
   
   if (fix_aspect_ratio) {
     p <- p + theme(aspect.ratio=1)
