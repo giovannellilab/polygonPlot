@@ -136,8 +136,7 @@ polygonplot <- function(df, shape,
   }
 
   if(shape == 3) {
-    p <- .triangle(df,
-                   axis_order,
+    p <- .triangle(axis_order,
                    ticks,
                    min_range, max_range,
                    mindata, maxdata,
@@ -180,6 +179,8 @@ polygonplot <- function(df, shape,
   if (fix_aspect_ratio) {
     p <- p + theme(aspect.ratio=1)
   }
+  
+  # Add title and remove figure backgrounds
   
   return(p)
 }
