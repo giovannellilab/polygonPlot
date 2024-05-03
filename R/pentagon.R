@@ -1,6 +1,6 @@
 
 #' @import ggplot2
-.pentagon <- function(df, axis_order, ticks, min_range, max_range, mindata, 
+.pentagon <- function(axis_order, ticks, min_range, max_range, mindata, 
                       maxdata, axis_labels, fillcolor, alpha, linecolor,
                       linetype, lwd, title){
   # Plot axes number
@@ -122,24 +122,52 @@
       y <- c(y, point_min5[2])
   }
   
-  p <- ggplot2::qplot(x,y)
+  df_coord <- data.frame(x=x, y=y)
+  
+  ## Add points delimiting range in the axis
+  p <- ggplot2::ggplot(data = df_coord, aes(x, y)) +
+    ggplot2::geom_point(show.legend = FALSE)
+  
   p <- p + ggplot2::geom_polygon(aes(x=x, y=y), fill = fillcolor, alpha = alpha, 
                         colour = linecolor, linetype = linetype, lwd = lwd)
-
-  p <- p + ggplot2::geom_line(aes(x=c(line1[1], line1[3]), 
-                                  y=c(line1[2],line1[4])))
   
-  p <- p + ggplot2::geom_line(aes(x=c(line2[1], line2[3]), 
-                                  y=c(line2[2],line2[4])))
+  df_coord_axis <- data.frame(
+    x_line1 = c(line1[1], line1[3]),
+    y_line1 = c(line1[2], line1[4]),
+    
+    x_line2 = c(line2[1], line2[3]),
+    y_line2 = c(line2[2],line2[4]),
+    
+    x_line3 = c(line3[1], line3[3]),
+    y_line3 = c(line3[2], line3[4]),
+    
+    x_line4 = c(line4[1], line4[3]),
+    y_line4 = c(line4[2], line4[4]),
+    
+    x_line5 = c(line5[1], line5[3]),
+    y_line5 = c(line5[2], line5[4])
+  )
   
-  p <- p + ggplot2::geom_line(aes(x=c(line3[1], line3[3]), 
-                                  y=c(line3[2],line3[4])))
+  ## print lines for each axis ##
+  p <- p + ggplot2::geom_line(data = df_coord_axis,
+                              aes(x=x_line1, y=y_line1),
+                              show.legend = FALSE)
   
-  p <- p + ggplot2::geom_line(aes(x=c(line4[1], line4[3]), 
-                                  y=c(line4[2],line4[4])))
+  p <- p + ggplot2::geom_line(data = df_coord_axis,
+                              aes(x=x_line2, y=y_line2),
+                              show.legend = FALSE)
   
-  p <- p + ggplot2::geom_line(aes(x=c(line5[1], line5[3]), 
-                                  y=c(line5[2],line5[4])))
+  p <- p + ggplot2::geom_line(data = df_coord_axis,
+                              aes(x=x_line3, y=y_line3),
+                              show.legend = FALSE)
+  
+  p <- p + ggplot2::geom_line(data = df_coord_axis,
+                              aes(x=x_line4, y=y_line4),
+                              show.legend = FALSE)
+  
+  p <- p + ggplot2::geom_line(data = df_coord_axis,
+                              aes(x=x_line5, y=y_line5),
+                              show.legend = FALSE)
   
   # Axis label
   p <- p + ggplot2::annotate(geom="text", 
@@ -267,23 +295,6 @@
                                      angle=288)
       }
   }
-
-  # Add title and remove figure backgrounds
-  p <- p + ggplot2::ggtitle(title)
-  p + ggplot2::theme(plot.title = element_text(size=16, face='bold',hjust=0.5),
-            axis.line=element_blank(),
-            axis.text.x=element_blank(),
-            axis.text.y=element_blank(),
-            axis.ticks=element_blank(),
-            axis.title.x=element_blank(), 
-            plot.margin = margin(6,2,2,2),
-            axis.title.y=element_blank(),
-            legend.position="none",
-            panel.background=element_blank(),
-            panel.border=element_blank(),
-            panel.grid.major=element_blank(),
-            panel.grid.minor=element_blank(),
-            plot.background=element_blank())
 
   return(p)
 }
