@@ -163,8 +163,7 @@ polygonplot <- function(df, shape,
                    linetype, lwd, title)
   }
   else {
-    p <- .hexagon(df,
-                  axis_order,
+    p <- .hexagon(axis_order,
                   ticks,
                   min_range, max_range,
                   mindata, maxdata,
