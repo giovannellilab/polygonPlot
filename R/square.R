@@ -1,6 +1,6 @@
 
 #' @import ggplot2
-.square <- function(df, axis_order, ticks, min_range, max_range, mindata, 
+.square <- function(axis_order, ticks, min_range, max_range, mindata, 
                     maxdata, axis_labels, fillcolor, alpha, linecolor, 
                     linetype, lwd, title){
   
@@ -29,7 +29,6 @@
   }
 
   ## Draw the lines
-  ##
   t = 0.5
   line1 = c(10  ,  8-t, 30  , 8-t)
   line2 = c(32+t, 10  , 32+t, 30)
@@ -88,45 +87,71 @@
       x <- c(x, point_min4[1])
       y <- c(y, point_min4[2])
   }
+  
+  df_coord <- data.frame(x=x, y=y)
+  
+  ## Add points delimiting range in the axis
+  p <- ggplot2::ggplot(data = df_coord, aes(x, y)) +
+    ggplot2::geom_point(show.legend = FALSE)
+  
+  ## Adding and coloring the polygon
+  p <- p + ggplot2::geom_polygon(aes(x=x, y=y), fill = fillcolor, alpha = alpha,
+                                 colour = linecolor, linetype = linetype,
+                                 linewidth = lwd, show.legend = TRUE)
 
-  p <- ggplot2::qplot(x,y)
-  p <- p + ggplot2::geom_polygon(aes(x=x, y=y), fill = fillcolor, alpha = alpha, 
-                        colour = linecolor, linetype = linetype, lwd = lwd)
+  df_coord_axis <- data.frame(
+    x_line1 = c(line1[1], line1[3]),
+    y_line1 = c(line1[2], line1[4]),
 
-  p <- p + ggplot2::geom_line(aes(x=c(line1[1], line1[3]), 
-                                  y=c(line1[2],line1[4])))
-  p <- p + ggplot2::geom_line(aes(x=c(line2[1], line2[3]), 
-                                  y=c(line2[2],line2[4])))
-  p <- p + ggplot2::geom_line(aes(x=c(line3[1], line3[3]), 
-                                  y=c(line3[2],line3[4])))
-  p <- p + ggplot2::geom_line(aes(x=c(line4[1], line4[3]), 
-                                  y=c(line4[2],line4[4])))
+    x_line2 = c(line2[1], line2[3]),
+    y_line2 = c(line2[2],line2[4]),
+
+    x_line3 = c(line3[1], line3[3]),
+    y_line3 = c(line3[2], line3[4]),
+
+    x_line4 = c(line4[1], line4[3]),
+    y_line4 = c(line4[2], line4[4])
+  )
+
+  ## print lines for each axis ##
+  p <- p + ggplot2::geom_line(data = df_coord_axis,
+                              aes(x=x_line1, y=y_line1),
+                              show.legend = FALSE)
+  p <- p + ggplot2::geom_line(data = df_coord_axis,
+                              aes(x=x_line2, y=y_line2),
+                              show.legend = FALSE)
+  p <- p + ggplot2::geom_line(data = df_coord_axis,
+                              aes(x=x_line3, y=y_line3),
+                              show.legend = FALSE)
+  p <- p + ggplot2::geom_line(data = df_coord_axis,
+                              aes(x=x_line4, y=y_line4),
+                              show.legend = FALSE)
 
   ## print labels for each axis ##
-  p <- p + ggplot2::annotate(geom="text", 
-                             x=(line1[1]+line1[3])/2, 
-                             y=(line1[2]+line1[4])/2-2, 
-                             label=axis_labels[a1], 
+  p <- p + ggplot2::annotate(geom="text",
+                             x=(line1[1]+line1[3])/2,
+                             y=(line1[2]+line1[4])/2-2,
+                             label=axis_labels[a1],
                              size=5)
-  
-  p <- p + ggplot2::annotate(geom="text", 
-                             x=(line2[1]+line2[3])/2+2, 
-                             y=(line2[2]+line2[4])/2, 
-                             label=axis_labels[a2], 
-                             size=5, 
+
+  p <- p + ggplot2::annotate(geom="text",
+                             x=(line2[1]+line2[3])/2+2,
+                             y=(line2[2]+line2[4])/2,
+                             label=axis_labels[a2],
+                             size=5,
                              angle=90)
-  
-  p <- p + ggplot2::annotate(geom="text", 
-                             x=(line3[1]+line3[3])/2, 
-                             y=(line3[2]+line3[4])/2+2, 
-                             label=axis_labels[a3], 
+
+  p <- p + ggplot2::annotate(geom="text",
+                             x=(line3[1]+line3[3])/2,
+                             y=(line3[2]+line3[4])/2+2,
+                             label=axis_labels[a3],
                              size=5)
-  
-  p <- p + ggplot2::annotate(geom="text", 
-                             x=(line4[1]+line4[3])/2-2, 
-                             y=(line4[2]+line4[4])/2, 
-                             label=axis_labels[a4], 
-                             size=5, 
+
+  p <- p + ggplot2::annotate(geom="text",
+                             x=(line4[1]+line4[3])/2-2,
+                             y=(line4[2]+line4[4])/2,
+                             label=axis_labels[a4],
+                             size=5,
                              angle=90)
 
   ### Add ticks for each axis ###
@@ -135,15 +160,16 @@
       for (tick in ticks[[a1]]) {
           point <- sq_norm(1, a1, tick)
           # All ticks
-          p <- p + ggplot2::annotate(geom="segment", 
-                                     x=point[1], 
-                                     xend = point[1], 
-                                     y=point[2]-t+0.05, 
+          p <- p + ggplot2::annotate(geom="segment",
+                                     x=point[1],
+                                     xend = point[1],
+                                     y=point[2]-t+0.05,
                                      yend = point[2]-t-0.3)
-          p <- p + ggplot2::annotate(geom="text", 
-                                     x=point[1], 
-                                     y=point[2]-t-0.7, 
-                                     label=tick, 
+          
+          p <- p + ggplot2::annotate(geom="text",
+                                     x=point[1],
+                                     y=point[2]-t-0.7,
+                                     label=tick,
                                      size=3.5)
       }
   }
@@ -153,16 +179,17 @@
       for (tick in ticks[[a2]]) {
           point <- sq_norm(2, a2, tick)
           # All ticks
-          p <- p + ggplot2::annotate(geom="segment", 
-                                     x=point[1]-(0.05-t), 
-                                     xend = point[1]+(0.3+t), 
-                                     y=point[2], 
+          p <- p + ggplot2::annotate(geom="segment",
+                                     x=point[1]-(0.05-t),
+                                     xend = point[1]+(0.3+t),
+                                     y=point[2],
                                      yend = point[2])
-          p <- p + ggplot2::annotate(geom="text", 
-                                     x=point[1]+(0.7+t), 
-                                     y=point[2], 
-                                     label=tick, 
-                                     size=3.5, 
+          
+          p <- p + ggplot2::annotate(geom="text",
+                                     x=point[1]+(0.7+t),
+                                     y=point[2],
+                                     label=tick,
+                                     size=3.5,
                                      angle=90)
       }
   }
@@ -171,15 +198,16 @@
   if(!all(is.na(ticks[[a3]]))) {
       for (tick in ticks[[a3]]) {
           point <- sq_norm(3, a3, tick)
-          p <- p + ggplot2::annotate(geom="segment", 
-                                     x=point[1], 
-                                     xend = point[1], 
-                                     y=point[2]-(0.05-t), 
+          p <- p + ggplot2::annotate(geom="segment",
+                                     x=point[1],
+                                     xend = point[1],
+                                     y=point[2]-(0.05-t),
                                      yend = point[2]+(0.3+t))
-          p <- p + ggplot2::annotate(geom="text", 
-                                     x=point[1], 
-                                     y=point[2]+(0.75+t), 
-                                     label=tick, 
+          
+          p <- p + ggplot2::annotate(geom="text",
+                                     x=point[1],
+                                     y=point[2]+(0.75+t),
+                                     label=tick,
                                      size=3.5)
       }
   }
@@ -188,36 +216,38 @@
   if(!all(is.na(ticks[[a4]]))) {
       for (tick in ticks[[a4]]) {
           point <- sq_norm(4, a4, tick)
-          p <- p + ggplot2::annotate(geom="segment", 
-                                     x=point[1]+(0.05-t), 
-                                     xend = point[1]-(0.3+t), 
-                                     y=point[2], 
+          p <- p + ggplot2::annotate(geom="segment",
+                                     x=point[1]+(0.05-t),
+                                     xend = point[1]-(0.3+t),
+                                     y=point[2],
                                      yend = point[2])
-          p <- p + ggplot2::annotate(geom="text", 
-                                     x=point[1]-(0.7+t), 
-                                     y=point[2], 
-                                     label=tick, 
-                                     size=3.5, 
+          
+          p <- p + ggplot2::annotate(geom="text",
+                                     x=point[1]-(0.7+t),
+                                     y=point[2],
+                                     label=tick,
+                                     size=3.5,
                                      angle=90)
       }
   }
 
   # Add title and remove figure backgrounds
-  p <- p + ggplot2::ggtitle(title)
-  p + ggplot2::theme(plot.title = element_text(size=16, face='bold',hjust=0.5),
-                     axis.line=element_blank(),
-                     axis.text.x=element_blank(),
-                     axis.text.y=element_blank(),
-                     axis.ticks=element_blank(),
-                     axis.title.x=element_blank(),
-                     plot.margin = margin(20,20,20,20),
-                     axis.title.y=element_blank(),
-                     legend.position="none",
-                     panel.background=element_blank(),
-                     panel.border=element_blank(),
-                     panel.grid.major=element_blank(),
-                     panel.grid.minor=element_blank(),
-                     plot.background=element_blank())
-
+  # p <- p + ggplot2::ggtitle(title)
+  # +
+  #   ggplot2::theme(plot.title = element_text(size=16, face='bold',hjust=0.5),
+  #                    axis.line=element_blank(),
+  #                    axis.text.x=element_blank(),
+  #                    axis.text.y=element_blank(),
+  #                    axis.ticks=element_blank(),
+  #                    axis.title.x=element_blank(),
+  #                    plot.margin = margin(20,20,20,20),
+  #                    axis.title.y=element_blank(),
+  #                    legend.position="none",
+  #                    panel.background=element_blank(),
+  #                    panel.border=element_blank(),
+  #                    panel.grid.major=element_blank(),
+  #                    panel.grid.minor=element_blank(),
+  #                    plot.background=element_blank())
+  #
   return(p)
 }
