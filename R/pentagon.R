@@ -128,8 +128,9 @@
   p <- ggplot2::ggplot(data = df_coord, aes(x, y)) +
     ggplot2::geom_point(show.legend = FALSE)
   
-  p <- p + ggplot2::geom_polygon(aes(x=x, y=y), fill = fillcolor, alpha = alpha, 
-                        colour = linecolor, linetype = linetype, lwd = lwd)
+  p <- p + ggplot2::geom_polygon(aes(x=x, y=y), fill = fillcolor, alpha = alpha,
+                                 colour = linecolor, linetype = linetype, 
+                                 lwd = lwd, show.legend = TRUE)
   
   df_coord_axis <- data.frame(
     x_line1 = c(line1[1], line1[3]),
