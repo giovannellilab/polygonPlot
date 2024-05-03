@@ -93,7 +93,7 @@
   
   p <- p + ggplot2::geom_polygon(aes(x=x, y=y), fill = fillcolor, alpha = alpha,
                                  colour= linecolor, linetype = linetype, 
-                                 lwd = lwd)
+                                 lwd = lwd, show.legend = TRUE)
 
   df_coord_axis <- data.frame(
     x_line1 = c(line1[1], line1[3]),
