@@ -28,3 +28,23 @@
   
   return(len_list)
 }
+
+#' Calculates the perimeter of the polygon
+#' 
+#' @param df Data frame containing the coordinates in two columns: x and y
+#' 
+#' @return The perimeter as float.
+#' 
+#' @examples
+#' .get_perimeter(x=x, y=y)
+#' 
+#' @seealso [polygonPlot::.get_area()]
+#' 
+#' @import checkmate
+#' @import dplyr
+#' @export
+.get_perimeter = function(df) {
+  checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
+  
+  return(sum(.get_lengths(df)))
+}
