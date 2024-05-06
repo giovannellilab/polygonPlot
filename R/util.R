@@ -54,7 +54,7 @@
 #' 
 #' @param df Data frame containing the coordinates in two columns: x and y
 #' 
-#' @return The perimeter as float.
+#' @return The perimeter as numeric.
 #' 
 #' @examples
 #' .get_perimeter(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
@@ -74,11 +74,12 @@
 #' @param df Data frame containing the coordinates in two columns: x and y
 #' @param shape Integer defining the type of polygon
 #' 
-#' @return The area as float.
+#' @return The area as numeric.
 #' 
 #' @examples
 #' .get_area(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)), shape=4)
 #' 
+#' @seealso [polygonPlot::.get_area_triangle()]
 #' @seealso [polygonPlot::.get_area_square()]
 #' 
 #' @import checkmate
@@ -88,7 +89,42 @@
   checkmate::assertChoice(x=shape, choices=3:6)
 
   area = case_when(
+    shape == 3 ~ .get_area_triangle(df),
     shape == 4 ~ .get_area_square(df)
+  )
+  
+  return(area)
+}
+
+#' Calculates the area of the triangle.
+#' 
+#' @param df Data frame containing the coordinates in two columns: x and y
+#' 
+#' @return The area as numeric.
+#' 
+#' @examples
+#' .get_area_triangle(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
+#' 
+#' @seealso [polygonPlot::.get_area()]
+#' 
+#' @import checkmate
+.get_area_triangle = function(df) {
+  
+  # WARNING: this code assumes the order of the points is correct!
+  sides = .get_lengths(df)
+
+  checkmate::checkNumeric(
+    x=sides,
+    min.len=3,
+    max.len=3
+  )
+  
+  # Calculate area using Heron's formula
+  area = 1/4 * sqrt(
+    ( sides[1] + sides[2] + sides[3]) * 
+    (-sides[1] + sides[2] + sides[3]) * 
+    ( sides[1] - sides[2] + sides[3]) * 
+    ( sides[1] + sides[2] - sides[3])
   )
   
   return(area)
@@ -100,17 +136,24 @@
 #' 
 #' @param df Data frame containing the coordinates in two columns: x and y
 #' 
-#' @return The area as float.
+#' @return The area as numeric.
 #' 
 #' @examples
 #' .get_area_square(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
 #' 
 #' @seealso [polygonPlot::.get_area()]
 #' 
+#' @import checkmate
 .get_area_square = function(df) {
   
   # WARNING: this code assumes the order of the points is correct!
   sides = .get_lengths(df)
+
+  checkmate::checkNumeric(
+    x=sides,
+    min.len=4,
+    max.len=4
+  )
   
   # Sort by value and get the top three
   sides = sort(sides, decreasing=TRUE)[1:3]
