@@ -187,6 +187,9 @@
                                  label=tick, size=3.5, angle=60)
     }
   }
+  
+  # Add mean polygon
+  p = p + .draw_mean_polygon(df_coord)
 
   return(p)
 }
