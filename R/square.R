@@ -168,7 +168,7 @@
                                      xend = point[1],
                                      y=point[2]-t+0.05,
                                      yend = point[2]-t-0.3)
-          
+
           p <- p + ggplot2::annotate(geom="text",
                                      x=point[1],
                                      y=point[2]-t-0.7,
@@ -187,7 +187,7 @@
                                      xend = point[1]+(0.3+t),
                                      y=point[2],
                                      yend = point[2])
-          
+
           p <- p + ggplot2::annotate(geom="text",
                                      x=point[1]+(0.7+t),
                                      y=point[2],
@@ -206,7 +206,7 @@
                                      xend = point[1],
                                      y=point[2]-(0.05-t),
                                      yend = point[2]+(0.3+t))
-          
+
           p <- p + ggplot2::annotate(geom="text",
                                      x=point[1],
                                      y=point[2]+(0.75+t),
@@ -224,7 +224,7 @@
                                      xend = point[1]-(0.3+t),
                                      y=point[2],
                                      yend = point[2])
-          
+
           p <- p + ggplot2::annotate(geom="text",
                                      x=point[1]-(0.7+t),
                                      y=point[2],
