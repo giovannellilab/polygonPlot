@@ -73,26 +73,25 @@
 #' functions for each polygon type.
 #' 
 #' @param df Data frame containing the coordinates in two columns: x and y
+#' @param shape Integer defining the type of polygon
 #' 
 #' @return The area as float.
 #' 
 #' @examples
-#' .get_area(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)), type="square")
+#' .get_area(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)), shape=4)
 #' 
 #' @seealso [polygonPlot::.get_area_square()]
-#' @seealso [polygonPlot::.get_perimeter()]
 #' 
 #' @import checkmate
 #' @import dplyr
-.get_area = function(df, type="square") {
+.get_area = function(df, shape) {
   checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
-  
-  area = NA
-  
-  if (type == "square") {
-    area = .get_area_square(df)
-  }
-  else stop(paste("[!] Polygon type", polygon_type, "is not implemented!"))
+  checkmate::assertInt(x=shape)
+  checkmate::assertChoice(x=shape, choices=3:6)
+
+  area = case_when(
+    shape == 4 ~ .get_area_square(df)
+  )
   
   return(area)
 }
