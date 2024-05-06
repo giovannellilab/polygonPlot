@@ -5,7 +5,7 @@
 \title{Draw polygon plot}
 \usage{
 polygonplot(
-  df,
+  dataframe,
   shape,
   extra = 0.5,
   fillcolor = "black",
@@ -14,23 +14,12 @@ polygonplot(
   linetype = "solid",
   lwd = 0.8,
   labels_axis = NULL,
-  title = "Polygon Plot",
+  title = NULL,
   fix_aspect_ratio = TRUE
 )
 }
 \arguments{
-\item{df}{data.frame containing the data. The first column of the dataframe
-must contain the strings \code{axis_min}, \code{axis_max} and \code{data} in that order.
-\code{axis_min} and \code{axis_max} are for the axis ranges. If left empty, the
-axis_min/max will be automatically calculated based on data given and
-extension will be decided based on the Axes range extension
-(\code{extra} parameter).
-From the second column to the last, they need to contains the value
-of \code{axis_min}, \code{axis_max}, and \code{data} for all the variables of interest.
-From the third row, each cell can contain data values for the corresponding
-column variable. Column names will be used as labels of the axis
-(starting from the second one). Change them in order to change the labels,
-but don't leave them empty.}
+\item{dataframe}{data.frame containing numeric values.}
 
 \item{shape}{integer value to specify the shape of the polygon (3=Triangle,
 4=Square, 5=Pentagon, 6=Hexagon)}
