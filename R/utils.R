@@ -75,7 +75,9 @@
   return(area)
 }
 
-#' Calculates the area of the square.
+#' Calculates the area of the square. Returns an upper bound estimation of the 
+#' area since the construction of an irregular trapezoid cannot be ensured in
+#' general.
 #' 
 #' @param df Data frame containing the coordinates in two columns: x and y
 #' 
