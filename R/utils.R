@@ -48,3 +48,59 @@
   
   return(sum(.get_lengths(df)))
 }
+
+#' Calculates the area of the polygon. It serves as a wrapper for the different 
+#' functions for each polygon type.
+#' 
+#' @param df Data frame containing the coordinates in two columns: x and y
+#' 
+#' @return The area as float.
+#' 
+#' @examples
+#' .get_area(x=x, y=y)
+#' 
+#' @seealso [polygonPlot::.get_area_square()]
+#' @seealso [polygonPlot::.get_perimeter()]
+#' 
+#' @import checkmate
+#' @import dplyr
+#' @export
+.get_area = function(df, polygon_type="square") {
+  checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
+  
+  area = NA
+  
+  if (polygon_type == "square") {
+    area = .get_area_square(df)
+  }
+  else stop(paste("[!] Polygon type", polygon_type, "is not implemented!"))
+  
+  return(area)
+}
+
+#' Calculates the area of the square.
+#' 
+#' @param df Data frame containing the coordinates in two columns: x and y
+#' 
+#' @return The area as float.
+#' 
+#' @examples
+#' .get_area(x=x, y=y)
+#' 
+#' @seealso [polygonPlot::.get_area()]
+#' 
+#' @import dplyr
+#' @export
+.get_area_square = function(df) {
+  
+  # WARNING: this code assumes the order of the points is correct!
+  sides = .get_lengths(df)
+  
+  # Sort by value and get the top three
+  sides = sort(sides, decreasing=TRUE)[1:3]
+  
+  # Use top two values as bases, third as height
+  area = sum(sides[1:2]) * sides[3] / 2
+  
+  return(area)
+}
