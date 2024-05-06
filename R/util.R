@@ -62,7 +62,6 @@
 #' @seealso [polygonPlot::.get_area()]
 #' 
 #' @import checkmate
-#' @import dplyr
 .get_perimeter = function(df) {
   checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
   
@@ -83,7 +82,6 @@
 #' @seealso [polygonPlot::.get_area_square()]
 #' 
 #' @import checkmate
-#' @import dplyr
 .get_area = function(df, shape) {
   checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
   checkmate::assertInt(x=shape)
@@ -109,7 +107,6 @@
 #' 
 #' @seealso [polygonPlot::.get_area()]
 #' 
-#' @import dplyr
 .get_area_square = function(df) {
   
   # WARNING: this code assumes the order of the points is correct!
