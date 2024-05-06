@@ -57,10 +57,7 @@
 #' @return The area as float.
 #' 
 #' @examples
-#' .get_area(
-#'   data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)),
-#'   polygon_type="square"
-#' )
+#' .get_area(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)), type="square")
 #' 
 #' @seealso [polygonPlot::.get_area_square()]
 #' @seealso [polygonPlot::.get_perimeter()]
@@ -68,12 +65,12 @@
 #' @import checkmate
 #' @import dplyr
 #' @export
-.get_area = function(df, polygon_type="square") {
+.get_area = function(df, type="square") {
   checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
   
   area = NA
   
-  if (polygon_type == "square") {
+  if (type == "square") {
     area = .get_area_square(df)
   }
   else stop(paste("[!] Polygon type", polygon_type, "is not implemented!"))
