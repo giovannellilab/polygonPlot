@@ -10,7 +10,6 @@
 #' @seealso [polygonPlot::.get_perimeter()]
 #' 
 #' @import dplyr
-#' @export
 .get_mean_coords = function(df) {
   
   mean_df = data.frame()
@@ -39,7 +38,6 @@
 #' 
 #' @import checkmate
 #' @import ggplot2
-#' @export
 .draw_mean_polygon = function(df) {
   checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
   

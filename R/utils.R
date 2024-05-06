@@ -11,7 +11,6 @@
 #' 
 #' @import checkmate
 #' @import dplyr
-#' @export
 .get_lengths = function(df) {
   checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
   
@@ -42,7 +41,6 @@
 #' 
 #' @import checkmate
 #' @import dplyr
-#' @export
 .get_perimeter = function(df) {
   checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
   
@@ -64,7 +62,6 @@
 #' 
 #' @import checkmate
 #' @import dplyr
-#' @export
 .get_area = function(df, type="square") {
   checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
   
@@ -90,7 +87,6 @@
 #' @seealso [polygonPlot::.get_area()]
 #' 
 #' @import dplyr
-#' @export
 .get_area_square = function(df) {
   
   # WARNING: this code assumes the order of the points is correct!
