@@ -1,6 +1,17 @@
 #' Draw polygon plot
 #'
-#' @param dataframe data.frame containing numeric values.
+#' @param df data.frame containing the data. The first column of the dataframe
+#' must contain the strings `axis_min`, `axis_max` and `data` in that order.
+#' `axis_min` and `axis_max` are for the axis ranges. If left empty, the 
+#' axis_min/max will be automatically calculated based on data given and 
+#' extension will be decided based on the Axes range extension 
+#' (`extra` parameter).
+#' From the second column to the last, they need to contains the value 
+#' of `axis_min`, `axis_max`, and `data` for all the variables of interest. 
+#' From the third row, each cell can contain data values for the corresponding
+#' column variable. Column names will be used as labels of the axis 
+#' (starting from the second one). Change them in order to change the labels, 
+#' but don't leave them empty. 
 #' @param shape integer value to specify the shape of the polygon (3=Triangle, 
 #' 4=Square, 5=Pentagon, 6=Hexagon)
 #' @param extra axis range extension
@@ -35,7 +46,7 @@
 #'
 #' @import checkmate
 #' @export
-polygonplot <- function(dataframe, shape, 
+polygonplot <- function(df, shape, 
                         extra = 0.5,
                         fillcolor = "black", 
                         alpha = 0.5,
@@ -48,8 +59,7 @@ polygonplot <- function(dataframe, shape,
   
   # Check params type
   checkmate::assertInt(shape, lower = 3, upper = 6)
-  checkmate::assertDataFrame(df, min.cols = shape, col.names = "named", 
-                             types = "numeric")
+  checkmate::assertDataFrame(df, min.cols = 1+shape, col.names = "named")
   
   checkmate::assertDouble(extra, lower = 0, upper = 1)
   checkmate::assertDouble(alpha, lower = 0, upper = 1)
@@ -120,8 +130,6 @@ polygonplot <- function(dataframe, shape,
     axis_labels <- labels_axis
   }
   
-  
-
   # Calculate ticks for each axis and return NA if min/max range not available
   ticks <- list()
   for (i in seq.int(1, shape)) {
