@@ -36,7 +36,7 @@
 #' @return The perimeter as float.
 #' 
 #' @examples
-#' .get_perimeter(x=x, y=y)
+#' .get_perimeter(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
 #' 
 #' @seealso [polygonPlot::.get_area()]
 #' 
@@ -57,7 +57,10 @@
 #' @return The area as float.
 #' 
 #' @examples
-#' .get_area(x=x, y=y)
+#' .get_area(
+#'   data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)),
+#'   polygon_type="square"
+#' )
 #' 
 #' @seealso [polygonPlot::.get_area_square()]
 #' @seealso [polygonPlot::.get_perimeter()]
@@ -85,7 +88,7 @@
 #' @return The area as float.
 #' 
 #' @examples
-#' .get_area(x=x, y=y)
+#' .get_area_square(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
 #' 
 #' @seealso [polygonPlot::.get_area()]
 #' 

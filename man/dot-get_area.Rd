@@ -18,7 +18,10 @@ Calculates the area of the polygon. It serves as a wrapper for the different
 functions for each polygon type.
 }
 \examples{
-.get_area(x=x, y=y)
+.get_area(
+  data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)),
+  polygon_type="square"
+)
 
 }
 \seealso{

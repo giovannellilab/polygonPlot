@@ -16,7 +16,7 @@ The area as float.
 Calculates the area of the square.
 }
 \examples{
-.get_area(x=x, y=y)
+.get_area_square(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
 
 }
 \seealso{

@@ -16,7 +16,7 @@ The perimeter as float.
 Calculates the perimeter of the polygon
 }
 \examples{
-.get_perimeter(x=x, y=y)
+.get_perimeter(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
 
 }
 \seealso{
