@@ -49,7 +49,7 @@
       aes(x=x, y=y),
       fill="darkgrey",
       colour="darkgrey",
-      alpha=0.35,
+      alpha=0.0,
       linetype=1,
       linewidth=0.5
     )
