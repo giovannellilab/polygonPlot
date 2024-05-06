@@ -1,5 +1,3 @@
-info,data1,data2,data3,data4,data5,data6
-axis_min,-300,-4,0,0,,-0.5
-axis_max,500,14,1000,50,,0.5
-data,300,-2,10,20,5,0.1
-,460,12,270,40,10,0.3
+data1,data2,data3,data4,data5,data6
+300,-2,10,20,5,0.1
+460,12,270,40,10,0.3
