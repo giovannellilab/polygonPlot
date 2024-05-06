@@ -23,7 +23,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Imports:
     checkmate,
-    ggplot2
+    ggplot2,
+    dplyr
 Suggests:
     knitr,
     RefManageR,
