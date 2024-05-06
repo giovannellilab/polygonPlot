@@ -44,8 +44,7 @@
   # Get mean coordinates from original ones
   mean_df = .get_mean_coords(df)
   
-  p = ggplot2::ggplot() +
-    ggplot2::geom_polygon(
+  p = ggplot2::geom_polygon(
       data=mean_df,
       aes(x=x, y=y),
       fill="darkgrey",
