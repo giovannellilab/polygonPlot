@@ -1,11 +1,11 @@
-#' Calculates the 
+#' Calculates the mean coordinates for further plotting the mean polygon
 #' 
 #' @param df Data frame containing the coordinates in two columns: x and y
 #' 
-#' @return The list of lengths as a numeric vector.
+#' @return A data.frame with the mean coordinates.
 #' 
 #' @examples
-#' .get_lengths(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
+#' .get_mean_coords(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
 #' 
 #' @seealso [polygonPlot::.get_perimeter()]
 #' 
@@ -26,14 +26,14 @@
   return(mean_df)
 }
 
-#' Utility function to calculate the length of each side of the polygon
+#' Plots the mean polygon
 #' 
 #' @param df Data frame containing the coordinates in two columns: x and y
 #' 
-#' @return The list of lengths as a numeric vector.
+#' @return The mean polygon as a `ggplot2` object.
 #' 
 #' @examples
-#' .get_lengths(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
+#' .draw_mean_polygon(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
 #' 
 #' @seealso [polygonPlot::.get_perimeter()]
 #' 
@@ -46,15 +46,15 @@
   # Get mean coordinates from original ones
   mean_df = .get_mean_coords(df)
   
-  p <- ggplot2::ggplot(mean_df)
-  p <- p + ggplot2::geom_polygon(
-    aes(x=x, y=y),
-    fill="darkgrey",
-    colour="darkgrey",
-    alpha=0.35,
-    linetype=1,
-    linewidth=0.5
-  )
+  p = ggplot2::ggplot(mean_df) +
+    ggplot2::geom_polygon(
+      aes(x=x, y=y),
+      fill="darkgrey",
+      colour="darkgrey",
+      alpha=0.35,
+      linetype=1,
+      linewidth=0.5
+    )
   
   return(p)
 }

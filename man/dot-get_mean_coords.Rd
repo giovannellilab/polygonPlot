@@ -2,7 +2,7 @@
 % Please edit documentation in R/mean-polygon.R
 \name{.get_mean_coords}
 \alias{.get_mean_coords}
-\title{Calculates the}
+\title{Calculates the mean coordinates for further plotting the mean polygon}
 \usage{
 .get_mean_coords(df)
 }
@@ -10,13 +10,13 @@
 \item{df}{Data frame containing the coordinates in two columns: x and y}
 }
 \value{
-The list of lengths as a numeric vector.
+A data.frame with the mean coordinates.
 }
 \description{
-Calculates the
+Calculates the mean coordinates for further plotting the mean polygon
 }
 \examples{
-.get_lengths(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
+.get_mean_coords(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
 
 }
 \seealso{

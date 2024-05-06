@@ -2,7 +2,7 @@
 % Please edit documentation in R/mean-polygon.R
 \name{.draw_mean_polygon}
 \alias{.draw_mean_polygon}
-\title{Utility function to calculate the length of each side of the polygon}
+\title{Plots the mean polygon}
 \usage{
 .draw_mean_polygon(df)
 }
@@ -10,13 +10,13 @@
 \item{df}{Data frame containing the coordinates in two columns: x and y}
 }
 \value{
-The list of lengths as a numeric vector.
+The mean polygon as a \code{ggplot2} object.
 }
 \description{
-Utility function to calculate the length of each side of the polygon
+Plots the mean polygon
 }
 \examples{
-.get_lengths(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
+.draw_mean_polygon(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
 
 }
 \seealso{
