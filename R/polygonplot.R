@@ -1,17 +1,6 @@
 #' Draw polygon plot
 #'
-#' @param df data.frame containing the data. The first column of the dataframe
-#' must contain the strings `axis_min`, `axis_max` and `data` in that order.
-#' `axis_min` and `axis_max` are for the axis ranges. If left empty, the 
-#' axis_min/max will be automatically calculated based on data given and 
-#' extension will be decided based on the Axes range extension 
-#' (`extra` parameter).
-#' From the second column to the last, they need to contains the value 
-#' of `axis_min`, `axis_max`, and `data` for all the variables of interest. 
-#' From the third row, each cell can contain data values for the corresponding
-#' column variable. Column names will be used as labels of the axis 
-#' (starting from the second one). Change them in order to change the labels, 
-#' but don't leave them empty. 
+#' @param dataframe data.frame containing numeric values.
 #' @param shape integer value to specify the shape of the polygon (3=Triangle, 
 #' 4=Square, 5=Pentagon, 6=Hexagon)
 #' @param extra axis range extension
@@ -46,7 +35,7 @@
 #'
 #' @import checkmate
 #' @export
-polygonplot <- function(df, shape, 
+polygonplot <- function(dataframe, shape, 
                         extra = 0.5,
                         fillcolor = "black", 
                         alpha = 0.5,
@@ -54,12 +43,13 @@ polygonplot <- function(df, shape,
                         linetype = "solid", 
                         lwd = 0.8, 
                         labels_axis = NULL,
-                        title = "Polygon Plot", 
+                        title = NULL, 
                         fix_aspect_ratio = TRUE){
   
   # Check params type
   checkmate::assertInt(shape, lower = 3, upper = 6)
-  checkmate::assertDataFrame(df, min.cols = 1+shape, col.names = "named")
+  checkmate::assertDataFrame(df, min.cols = shape, col.names = "named", 
+                             types = "numeric")
   
   checkmate::assertDouble(extra, lower = 0, upper = 1)
   checkmate::assertDouble(alpha, lower = 0, upper = 1)
@@ -67,7 +57,10 @@ polygonplot <- function(df, shape,
                                       "dotdash", "longdash", "twodash"))
   checkmate::assertDouble(lwd)
   checkmate::assertCharacter(labels_axis, len = shape, null.ok = TRUE)
+  checkmate::assertCharacter(title, null.ok = TRUE)
   checkmate::assertFlag(fix_aspect_ratio)
+  
+  df <- .internal_obj(dataframe)
   
   axis_order = list("axis1" = 1, "axis2" = 2, "axis3" = 3, 
                     "axis4" = 4, "axis5" = 5, "axis6" = 6)
@@ -178,7 +171,9 @@ polygonplot <- function(df, shape,
     p <- p + theme(aspect.ratio=1)
   }
   
-  # Add title and remove figure backgrounds
-  
+  if (!is.null(title)){
+    p <- p + ggplot2::ggtitle(title)
+  }
+
   return(p)
 }
