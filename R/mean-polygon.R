@@ -15,10 +15,10 @@
   mean_df = data.frame()
   
   # WARNING: this code assumes the order of the points is correct!
-  for (i in seq(from=1, to=nrow(df_coords), by=2)) {
+  for (i in seq(from=1, to=nrow(df), by=2)) {
     mean_df = mean_df %>%
       bind_rows(
-        df_coords %>% slice(i, i+1) %>% summarise(x=mean(x), y=mean(y))
+        df %>% slice(i, i+1) %>% summarise(x=mean(x), y=mean(y))
       )
   }
   
