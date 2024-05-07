@@ -52,10 +52,11 @@ but don't leave them empty.}
 \item{title}{title of the plot}
 
 \item{fix_aspect_ratio}{Boolean flag to fix the aspect ratio of the plot as
-\code{1}. It is strongly recommended to leave it as default value \code{TRUE}. NOTE: If you are
-going to change the theme of the returned ggplot object, remember to put in
-the \code{theme} function the following code \code{aspect.ratio = 1} in order to
-keep the text and the relative ticks aligned on the axis.}
+\code{1}. It is strongly recommended to leave it as default value \code{TRUE}.
+NOTE: If you are going to change the theme of the returned ggplot object,
+remember to put in the \code{theme} function the following code
+\code{aspect.ratio = 1} in order to keep the text and the relative
+ticks aligned on the axis.}
 }
 \value{
 A \code{ggplot2} object.
