@@ -87,7 +87,7 @@
   checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
   checkmate::assertInt(x=shape)
   checkmate::assertChoice(x=shape, choices=3:6)
-
+  
   area = case_when(
     shape == 3 ~ .get_area_triangle(df),
     shape == 4 ~ .get_area_square(df)
@@ -112,7 +112,7 @@
   
   # WARNING: this code assumes the order of the points is correct!
   sides = .get_lengths(df)
-
+  
   checkmate::checkNumeric(
     x=sides,
     min.len=3,
@@ -148,7 +148,7 @@
   
   # WARNING: this code assumes the order of the points is correct!
   sides = .get_lengths(df)
-
+  
   checkmate::checkNumeric(
     x=sides,
     min.len=4,
