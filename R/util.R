@@ -1,6 +1,21 @@
-
-# Creation of the internal object
-.internal_obj <- function(dataframe){
+#' Prepare dataframe for polygon plot
+#'
+#' @param dataframe classic data.frame with numeric values
+#'
+#' @return `data.frame` object ready for the polygon plot function
+#' @export
+#'
+#' @examples
+#' classic_df <- data.frame(
+#'   data1=c(-300, 500, 300, 350),
+#'   data2=c(4, 14, -2, 12),
+#'   data3=c(0, 1000, 10, 50),
+#'   data4=c(0, 50, 20, 40)
+#' )
+#' 
+#' df <- prepare_dataframe(classic_df)
+#' df
+prepare_dataframe <- function(dataframe){
   m <- as.data.frame(dataframe)
   
   ax_min <- apply(m,2,min, na.rm = TRUE)
