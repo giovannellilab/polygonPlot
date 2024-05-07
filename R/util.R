@@ -32,7 +32,6 @@
 #' @seealso [polygonPlot::.get_perimeter()]
 #' 
 #' @import checkmate
-#' @import dplyr
 .get_lengths = function(df) {
   checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
   
@@ -41,10 +40,7 @@
   # WARNING: this code assumes the order of the points is correct!
   # Get the points for each axis 2 by 2 (corresponding to each side)
   for (i in seq(from=1, to=nrow(df), by=2)) {
-    len_list = c(
-      len_list,
-      dist(df %>% slice(i, i+1))
-    )
+    len_list = c(len_list, dist(df[i:(i+1),]))
   }
   
   return(len_list)
