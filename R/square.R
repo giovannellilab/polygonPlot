@@ -239,7 +239,7 @@
   
   # Print perimeter and area
   message(sprintf("Perimeter: %5.2f", .get_perimeter(df_coord)))
-  message(sprintf("Area:      %5.2f", .get_area(df_coord, shape=4)))
+  message(sprintf("Area:      %5.2f", .get_area(df_coord)))
 
   return(p)
 }

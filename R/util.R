@@ -64,102 +64,6 @@
   return(sum(.get_lengths(df)))
 }
 
-#' Calculates the area of the polygon. It serves as a wrapper for the different 
-#' functions for each polygon type.
-#' 
-#' @param df Data frame containing the coordinates in two columns: x and y
-#' @param shape Integer defining the type of polygon
-#' 
-#' @return The area as numeric.
-#' 
-#' @examples
-#' .get_area(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)), shape=4)
-#' 
-#' @seealso [polygonPlot::.get_area_triangle()]
-#' @seealso [polygonPlot::.get_area_square()]
-#' 
-#' @import checkmate
-.get_area = function(df, shape) {
-  checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
-  checkmate::assertInt(x=shape)
-  checkmate::assertChoice(x=shape, choices=3:6)
-  
-  area = case_when(
-    shape == 3 ~ .get_area_triangle(df),
-    shape == 4 ~ .get_area_square(df)
-  )
-  
-  return(area)
-}
-
-#' Calculates the area of the triangle.
-#' 
-#' @param df Data frame containing the coordinates in two columns: x and y
-#' 
-#' @return The area as numeric.
-#' 
-#' @examples
-#' .get_area_triangle(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
-#' 
-#' @seealso [polygonPlot::.get_area()]
-#' 
-#' @import checkmate
-.get_area_triangle = function(df) {
-  
-  # WARNING: this code assumes the order of the points is correct!
-  sides = .get_lengths(df)
-  
-  checkmate::checkNumeric(
-    x=sides,
-    min.len=3,
-    max.len=3
-  )
-  
-  # Calculate area using Heron's formula
-  area = 1/4 * sqrt(
-    ( sides[1] + sides[2] + sides[3]) * 
-    (-sides[1] + sides[2] + sides[3]) * 
-    ( sides[1] - sides[2] + sides[3]) * 
-    ( sides[1] + sides[2] - sides[3])
-  )
-  
-  return(area)
-}
-
-#' Calculates the area of the square. Returns an upper bound estimation of the 
-#' area since the construction of an irregular trapezoid cannot be ensured in
-#' general.
-#' 
-#' @param df Data frame containing the coordinates in two columns: x and y
-#' 
-#' @return The area as numeric.
-#' 
-#' @examples
-#' .get_area_square(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
-#' 
-#' @seealso [polygonPlot::.get_area()]
-#' 
-#' @import checkmate
-.get_area_square = function(df) {
-  
-  # WARNING: this code assumes the order of the points is correct!
-  sides = .get_lengths(df)
-  
-  checkmate::checkNumeric(
-    x=sides,
-    min.len=4,
-    max.len=4
-  )
-  
-  # Sort by value and get the top three
-  sides = sort(sides, decreasing=TRUE)[1:3]
-  
-  # Use top two values as bases, third as height
-  area = sum(sides[1:2]) * sides[3] / 2
-  
-  return(area)
-}
-
 #' Collapses the original polygon by linking each segment to the last vertex
 #' of the previous segment, basically connecting all sides to the base.
 #' 
@@ -189,4 +93,25 @@
   df = unique(df)
   
   return(df)
+}
+
+#' Calculates the area of the polygon.
+#' 
+#' @param df Data frame containing the coordinates in two columns: x and y
+#' 
+#' @return The area as numeric.
+#' 
+#' @examples
+#' .get_area(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
+#' 
+#' @seealso [polygonPlot::.collapse_polygon()]
+#' 
+#' @import checkmate
+#' @importFrom pracma polyarea
+.get_area = function(df) {
+  checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
+  
+  df = .collapse_polygon(df)
+  
+  return(pracma::polyarea(x=df$x, y=df$y))
 }
