@@ -23,10 +23,11 @@
 #' @param labels_axis vector with the desired labels of the axis
 #' @param title title of the plot
 #' @param fix_aspect_ratio Boolean flag to fix the aspect ratio of the plot as 
-#' `1`. It is strongly recommended to leave it as default value `TRUE`. NOTE: If you are 
-#' going to change the theme of the returned ggplot object, remember to put in 
-#' the `theme` function the following code `aspect.ratio = 1` in order to 
-#' keep the text and the relative ticks aligned on the axis.
+#' `1`. It is strongly recommended to leave it as default value `TRUE`. 
+#' NOTE: If you are going to change the theme of the returned ggplot object, 
+#' remember to put in the `theme` function the following code 
+#' `aspect.ratio = 1` in order to keep the text and the relative 
+#' ticks aligned on the axis.
 #'
 #'
 #' @return A `ggplot2` object.
@@ -67,7 +68,7 @@ polygonplot <- function(df, shape,
   checkmate::assertChoice(linetype, c("blank", "solid", "dashed", "dotted", 
                                       "dotdash", "longdash", "twodash"))
   checkmate::assertDouble(lwd)
-  checkmate::assertCharacter(labels_axis, len = shape, null.ok = TRUE)
+  checkmate::assertVector(labels_axis, len = shape, null.ok = TRUE)
   checkmate::assertCharacter(title, null.ok = TRUE)
   checkmate::assertFlag(fix_aspect_ratio)
   
