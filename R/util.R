@@ -159,3 +159,34 @@
   
   return(area)
 }
+
+#' Collapses the original polygon by linking each segment to the last vertex
+#' of the previous segment, basically connecting all sides to the base.
+#' 
+#' @param df Data frame containing the coordinates in two columns: x and y
+#' 
+#' @return The coordinates of the collapsed polygon as a data frame.
+#' 
+#' @examples
+#' .collapse_polygon(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
+#' 
+#' @seealso [polygonPlot::.get_area()]
+#' 
+.collapse_polygon = function(df) {
+
+  # WARNING: this code assumes the order of the points is correct!
+  # Connect each segment to the base (first vertex after base is number 3)
+  for (i in seq(from=3, to=nrow(df), by=2)) {
+    # Get translation in the Cartesian plane
+    diff_vector = df[(i),] - df[i-1,]
+    
+    # Connect segment to the last vertex of the previous segment
+    df[(i),] = df[(i),] - diff_vector # Same as setting as df[i-1,]
+    df[(i+1),] = df[(i+1),] - diff_vector
+  }
+  
+  # Remove duplicated vertices caused by connecting segments
+  df = unique(df)
+  
+  return(df)
+}
