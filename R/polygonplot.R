@@ -71,8 +71,6 @@ polygonplot <- function(df, shape,
   checkmate::assertCharacter(title, null.ok = TRUE)
   checkmate::assertFlag(fix_aspect_ratio)
   
-  df <- .internal_obj(dataframe)
-  
   axis_order = list("axis1" = 1, "axis2" = 2, "axis3" = 3, 
                     "axis4" = 4, "axis5" = 5, "axis6" = 6)
 
