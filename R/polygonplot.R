@@ -60,8 +60,7 @@ polygonplot <- function(df, shape,
   
   # Check params type
   checkmate::assertInt(shape, lower = 3, upper = 6)
-  checkmate::assertDataFrame(dataframe, min.cols = shape, col.names = "named", 
-                             types = "numeric")
+  checkmate::assertDataFrame(df, min.cols = 1+shape, col.names = "named")
   
   checkmate::assertDouble(extra, lower = 0, upper = 1)
   checkmate::assertDouble(alpha, lower = 0, upper = 1)
