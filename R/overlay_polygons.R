@@ -11,7 +11,7 @@
 #'
 #' @import checkmate
 #' @import ggplot2
-overlay_polygons <- function(plot_list, label_list) {
+overlay_polygons <- function(plot_list, label_list, matching_color_points=FALSE) {
   checkmate::assertList(plot_list, types = "ggplot")
   checkmate::assertCharacter(label_list, len = length(plot_list), 
                              null.ok = FALSE, any.missing = FALSE)
@@ -44,13 +44,25 @@ overlay_polygons <- function(plot_list, label_list) {
   
   col <- as.character(m$colour)
   names(col) <- as.character(m$plot_labels)
-  
+
   master_plot <- first_plot +
     ggplot2::geom_polygon(data=m, aes(x, y, fill=plot_labels, alpha = plot_labels, colour = plot_labels), 
                           linewidth = unique(m$linewidth)) +
+    ggplot2::geom_point(data=m, aes(x, y, color=plot_labels)) +
     ggplot2::scale_fill_manual(values = fil) + 
     ggplot2::scale_alpha_manual(values = al) + 
-    ggplot2::scale_colour_manual(values = col) 
+    ggplot2::scale_colour_manual(values = col)
+  
+  if(matching_color_points) {
+    master_plot <- master_plot + 
+      ggplot2::geom_point(data=m, aes(x, y, color=plot_labels)) + 
+      ggplot2::scale_color_manual(values = fil)
+  } else {
+    master_plot <- master_plot + 
+      ggplot2::geom_point(data=m, aes(x, y))
+  }
+  
+  master_plot <- master_plot + ggplot2::ggtitle("")
   
   return(master_plot)
 }
