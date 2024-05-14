@@ -24,7 +24,8 @@ RoxygenNote: 7.3.1
 Imports:
     checkmate,
     ggplot2,
-    dplyr
+    dplyr,
+    pracma
 Suggests:
     knitr,
     RefManageR,
