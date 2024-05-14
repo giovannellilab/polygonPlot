@@ -41,9 +41,6 @@ prepare_dataframe <- function(dataframe){
 #' 
 #' @return The list of lengths as a numeric vector.
 #' 
-#' @examples
-#' .get_lengths(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
-#' 
 #' @seealso [polygonPlot::.get_perimeter()]
 #' 
 #' @importFrom stats dist
@@ -68,9 +65,6 @@ prepare_dataframe <- function(dataframe){
 #' 
 #' @return The perimeter as numeric.
 #' 
-#' @examples
-#' .get_perimeter(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
-#' 
 #' @seealso [polygonPlot::.get_area()]
 #' 
 #' @import checkmate
@@ -86,9 +80,6 @@ prepare_dataframe <- function(dataframe){
 #' @param df Data frame containing the coordinates in two columns: x and y
 #' 
 #' @return The coordinates of the collapsed polygon as a data frame.
-#' 
-#' @examples
-#' .collapse_polygon(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
 #' 
 #' @seealso [polygonPlot::.get_area()]
 #' 
@@ -116,9 +107,6 @@ prepare_dataframe <- function(dataframe){
 #' @param df Data frame containing the coordinates in two columns: x and y
 #' 
 #' @return The area as numeric.
-#' 
-#' @examples
-#' .get_area(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
 #' 
 #' @seealso [polygonPlot::.collapse_polygon()]
 #' 
