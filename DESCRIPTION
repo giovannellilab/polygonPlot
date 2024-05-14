@@ -14,7 +14,7 @@ Authors@R: c(
     person("Donato", "Giovannelli", role = "aut",
            email = "donato.giovannelli@unina.it"))
 Description: Polygon plot is designed to visualize multivariate ranges as opposite to single data points and it is able to show 3 to 6 variables simultaneously showcase the min-max and average for each.
-License: CC BY-SA 4.0
+License: CC BY-SA 4.0 + file LICENSE
 URL: https://github.com/giovannellilab/polygonPlot
 BugReports: https://github.com/giovannellilab/polygonPlot/issues
 Encoding: UTF-8
@@ -23,7 +23,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Imports:
     checkmate,
-    ggplot2
+    ggplot2,
+    dplyr,
+    pracma
 Suggests:
     knitr,
     RefManageR,

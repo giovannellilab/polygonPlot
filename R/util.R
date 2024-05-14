@@ -34,3 +34,88 @@ prepare_dataframe <- function(dataframe){
   
   return(m)
 }
+
+#' Calculates the length of each side of the polygon
+#' 
+#' @param df Data frame containing the coordinates in two columns: x and y
+#' 
+#' @return The list of lengths as a numeric vector.
+#' 
+#' @seealso [polygonPlot::.get_perimeter()]
+#' 
+#' @importFrom stats dist
+#' @import checkmate
+.get_lengths = function(df) {
+  checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
+  
+  len_list = c()
+  
+  # WARNING: this code assumes the order of the points is correct!
+  # Get the points for each axis 2 by 2 (corresponding to each side)
+  for (i in seq(from=1, to=nrow(df), by=2)) {
+    len_list = c(len_list, stats::dist(df[i:(i+1),]))
+  }
+  
+  return(len_list)
+}
+
+#' Calculates the perimeter of the polygon
+#' 
+#' @param df Data frame containing the coordinates in two columns: x and y
+#' 
+#' @return The perimeter as numeric.
+#' 
+#' @seealso [polygonPlot::.get_area()]
+#' 
+#' @import checkmate
+.get_perimeter = function(df) {
+  checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
+  
+  return(sum(.get_lengths(df)))
+}
+
+#' Collapses the original polygon by linking each segment to the last vertex
+#' of the previous segment, basically connecting all sides to the base.
+#' 
+#' @param df Data frame containing the coordinates in two columns: x and y
+#' 
+#' @return The coordinates of the collapsed polygon as a data frame.
+#' 
+#' @seealso [polygonPlot::.get_area()]
+#' 
+.collapse_polygon = function(df) {
+
+  # WARNING: this code assumes the order of the points is correct!
+  # Connect each segment to the base (first vertex after base is number 3)
+  for (i in seq(from=3, to=nrow(df), by=2)) {
+    # Get translation in the Cartesian plane
+    diff_vector = df[(i),] - df[i-1,]
+    
+    # Connect segment to the last vertex of the previous segment
+    df[(i),] = df[(i),] - diff_vector # Same as setting as df[i-1,]
+    df[(i+1),] = df[(i+1),] - diff_vector
+  }
+  
+  # Remove duplicated vertices caused by connecting segments
+  df = unique(df)
+  
+  return(df)
+}
+
+#' Calculates the area of the polygon.
+#' 
+#' @param df Data frame containing the coordinates in two columns: x and y
+#' 
+#' @return The area as numeric.
+#' 
+#' @seealso [polygonPlot::.collapse_polygon()]
+#' 
+#' @import checkmate
+#' @importFrom pracma polyarea
+.get_area = function(df) {
+  checkmate::assertDataFrame(x=df, col.names="named", ncols=2)
+  
+  df = .collapse_polygon(df)
+  
+  return(pracma::polyarea(x=df$x, y=df$y))
+}

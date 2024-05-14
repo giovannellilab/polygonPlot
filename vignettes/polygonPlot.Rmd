@@ -95,9 +95,17 @@ df
 a minimal version
 ```{r load-data-minimal}
 
-df_min <- read.csv(system.file(file.path("extdata", "minimal_example.csv"), 
-                               package="polygonPlot"))
-df_min
+df <- read.csv(
+  system.file(
+    file.path(
+      "extdata",
+      "minimal_example.csv"
+    ), 
+    package="polygonPlot"
+  )
+)
+
+df
 ```
 
 ### Optional
@@ -126,7 +134,7 @@ See the section `About the aspect.ratio` for a practical example.
 ## Polygons
 ### Shape: 3 - Triangle
 
-```{r fig.width=7, fig.height=7 }
+```{r fig.width=7, fig.height=7}
 plot_triangle <- polygonplot(df, shape = 3, fillcolor = "#e56b6f", linecolor = "#b56576",
                              labels_axis = c("earth", "moon", "sun"))
 plot_triangle
@@ -135,7 +143,7 @@ plot_triangle
 
 ### Shape: 4 - Square
 
-```{r fig.width=7, fig.height=7 }
+```{r fig.width=7, fig.height=7}
 plot_square <- polygonplot(df, shape = 4, fillcolor = "#57cc99", linecolor = "#38a3a5")
 plot_square
 ```

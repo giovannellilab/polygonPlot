@@ -11,6 +11,7 @@
 #'
 #' @import checkmate
 #' @import ggplot2
+
 overlay_polygons <- function(plot_list, label_list, matching_color_points=FALSE) {
   checkmate::assertList(plot_list, types = "ggplot")
   checkmate::assertCharacter(label_list, len = length(plot_list), 

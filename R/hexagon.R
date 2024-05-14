@@ -348,5 +348,13 @@
       }
   }
 
+  # Add mean polygon
+  p = p + .draw_mean_polygon(df_coord)
+  
+  # Print perimeter and area
+  message(sprintf("Perimeter: %5.2f", .get_perimeter(df_coord)))
+  message(sprintf("Area:      %5.2f", .get_area(df_coord)))
+
+
   return(p)
 }
