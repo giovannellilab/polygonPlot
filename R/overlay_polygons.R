@@ -5,6 +5,8 @@
 #' (ggplot2 object). All the polygon plot should be drawn on the same axis range
 #' @param label_list is a vector of strings. Must have the same length of 
 #' `plot_list` object
+#' @param matching_color_points is a boolean specifying whether the points
+#' should be colored according to `label_list`
 #'
 #' @return a ggplot2 object
 #' @export

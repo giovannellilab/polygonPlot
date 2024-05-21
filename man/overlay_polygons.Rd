@@ -4,7 +4,7 @@
 \alias{overlay_polygons}
 \title{Overlay different polygon plots on the same axis}
 \usage{
-overlay_polygons(plot_list, label_list)
+overlay_polygons(plot_list, label_list, matching_color_points = FALSE)
 }
 \arguments{
 \item{plot_list}{is a list object containing a series of polygon plots
@@ -12,6 +12,9 @@ overlay_polygons(plot_list, label_list)
 
 \item{label_list}{is a vector of strings. Must have the same length of
 \code{plot_list} object}
+
+\item{matching_color_points}{is a boolean specifying whether the points
+should be colored according to \code{label_list}}
 }
 \value{
 a ggplot2 object
