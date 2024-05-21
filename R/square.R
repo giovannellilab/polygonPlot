@@ -115,19 +115,19 @@
 
   ## print lines for each axis ##
   p <- p + ggplot2::geom_line(data = df_coord_axis,
-                              aes(x=x_line1, y=y_line1),
+                              aes(x=get("x_line1"), y=get("y_line1")),
                               show.legend = FALSE)
 
   p <- p + ggplot2::geom_line(data = df_coord_axis,
-                              aes(x=x_line2, y=y_line2),
+                              aes(x=get("x_line2"), y=get("y_line2")),
                               show.legend = FALSE)
 
   p <- p + ggplot2::geom_line(data = df_coord_axis,
-                              aes(x=x_line3, y=y_line3),
+                              aes(x=get("x_line3"), y=get("y_line3")),
                               show.legend = FALSE)
                               
   p <- p + ggplot2::geom_line(data = df_coord_axis,
-                              aes(x=x_line4, y=y_line4),
+                              aes(x=get("x_line4"), y=get("y_line4")),
                               show.legend = FALSE)
 
   ## print labels for each axis ##
