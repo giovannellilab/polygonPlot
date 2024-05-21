@@ -15,7 +15,7 @@
   for (i in seq(from=1, to=nrow(df), by=2)) {
     mean_df = mean_df %>%
       bind_rows(
-        df %>% slice(i, i+1) %>% summarise(x=mean(x), y=mean(y))
+        df %>% slice(i, i+1) %>% summarise(x=mean(get("x")), y=mean(get("y")))
       )
   }
   
@@ -40,7 +40,7 @@
   
   p = ggplot2::geom_polygon(
       data=mean_df,
-      aes(x=x, y=y),
+      aes(x=get("x"), y=get("y")),
       fill="darkgrey",
       colour="darkgrey",
       alpha=0.0,
