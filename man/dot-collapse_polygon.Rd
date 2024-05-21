@@ -17,10 +17,6 @@ The coordinates of the collapsed polygon as a data frame.
 Collapses the original polygon by linking each segment to the last vertex
 of the previous segment, basically connecting all sides to the base.
 }
-\examples{
-.collapse_polygon(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
-
-}
 \seealso{
 \code{\link[=.get_area]{.get_area()}}
 }

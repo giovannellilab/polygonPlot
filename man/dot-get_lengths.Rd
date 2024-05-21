@@ -15,10 +15,6 @@ The list of lengths as a numeric vector.
 \description{
 Calculates the length of each side of the polygon
 }
-\examples{
-.get_lengths(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
-
-}
 \seealso{
 \code{\link[=.get_perimeter]{.get_perimeter()}}
 }

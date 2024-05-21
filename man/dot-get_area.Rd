@@ -15,10 +15,6 @@ The area as numeric.
 \description{
 Calculates the area of the polygon.
 }
-\examples{
-.get_area(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
-
-}
 \seealso{
 \code{\link[=.collapse_polygon]{.collapse_polygon()}}
 }
