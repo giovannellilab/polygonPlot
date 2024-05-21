@@ -4,9 +4,6 @@
 #' 
 #' @return A data.frame with the mean coordinates.
 #' 
-#' @examples
-#' .get_mean_coords(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
-#' 
 #' @seealso [polygonPlot::.get_perimeter()]
 #' 
 #' @import dplyr
@@ -30,9 +27,6 @@
 #' @param df Data frame containing the coordinates in two columns: x and y
 #' 
 #' @return The mean polygon as a `ggplot2` object.
-#' 
-#' @examples
-#' .draw_mean_polygon(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
 #' 
 #' @seealso [polygonPlot::.get_perimeter()]
 #' 

@@ -15,10 +15,6 @@ A data.frame with the mean coordinates.
 \description{
 Calculates the mean coordinates for further plotting the mean polygon
 }
-\examples{
-.get_mean_coords(data.frame(x=c(8, 8, 22, 24), y=c(12, 15, 8, 8)))
-
-}
 \seealso{
 \code{\link[=.get_perimeter]{.get_perimeter()}}
 }
