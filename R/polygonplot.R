@@ -174,7 +174,8 @@ polygonplot <- function(df, shape,
                   mindata, maxdata,
                   axis_labels,
                   fillcolor, alpha, linecolor,
-                  linetype, lwd, title)
+                  linetype, lwd, annotation_tick_size, annotation_label_size, 
+                  title)
   }
   
   p <- p + ggplot2::theme_void()

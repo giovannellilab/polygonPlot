@@ -2,7 +2,8 @@
 #' @import ggplot2
 .hexagon <- function(axis_order, ticks, min_range, max_range, mindata, 
                      maxdata, axis_labels, fillcolor, alpha, linecolor,
-                     linetype, lwd, title) {
+                     linetype, lwd, annotation_tick_size, annotation_label_size, 
+                     title) {
   
   # Plot axes number
   a1 <- as.integer(axis_order$axis1)
@@ -199,40 +200,40 @@
                              x=(line1[1]+line1[3])/2, 
                              y=(line1[2]+line1[4])/2-3, 
                              label=axis_labels[a1], 
-                             size=5)
+                             size=annotation_label_size)
   
   p <- p + ggplot2::annotate(geom="text", 
                              x=(line2[1]+line2[3])/2+3*s60,
                              y=(line2[2]+line2[4])/2-3*c60, 
                              label=axis_labels[a2], 
-                             size=5, 
+                             size=annotation_label_size, 
                              angle=60)
   
   p <- p + ggplot2::annotate(geom="text", 
                              x=(line3[1]+line3[3])/2+3*s60,
                              y=(line3[2]+line3[4])/2+3*c60, 
                              label=axis_labels[a3], 
-                             size=5, 
+                             size=annotation_label_size, 
                              angle=300)
   
   p <- p + ggplot2::annotate(geom="text", 
                              x=(line4[1]+line4[3])/2, 
                              y=(line4[2]+line4[4])/2+3, 
                              label=axis_labels[a4], 
-                             size=5)
+                             size=annotation_label_size)
   
   p <- p + ggplot2::annotate(geom="text", 
                              x=(line5[1]+line5[3])/2-3*s60,
                              y=(line5[2]+line5[4])/2+3*c60, 
                              label=axis_labels[a5], 
-                             size=5, 
+                             size=annotation_label_size, 
                              angle=60)
   
   p <- p + ggplot2::annotate(geom="text", 
                              x=(line6[1]+line6[3])/2-3*s60,
                              y=(line6[2]+line6[4])/2-3*c60, 
                              label=axis_labels[a6], 
-                             size=5, 
+                             size=annotation_label_size, 
                              angle=300)
 
   ### Add ticks for each axis ###
@@ -250,7 +251,7 @@
                                      x=point[1], 
                                      y=point[2]-t-1.2, 
                                      label=tick, 
-                                     size=3.5)
+                                     size=annotation_tick_size)
       }
   }
 
@@ -268,7 +269,7 @@
                                      x=point[1]+(1.2+t)*s60, 
                                      y=point[2]-(1.2+t)*c60, 
                                      label=tick, 
-                                     size=3.5, 
+                                     size=annotation_tick_size, 
                                      angle=60)
       }
   }
@@ -287,7 +288,7 @@
                                      x=point[1]+(1.2+t)*s60, 
                                      y=point[2]+(1.2+t)*c60, 
                                      label=tick, 
-                                     size=3.5, 
+                                     size=annotation_tick_size, 
                                      angle=300)
       }
   }
@@ -306,7 +307,7 @@
                                      x=point[1], 
                                      y=point[2]+(1.2+t), 
                                      label=tick, 
-                                     size=3.5)
+                                     size=annotation_tick_size)
       }
   }
 
@@ -324,7 +325,7 @@
                                      x=point[1]-(1.2+t)*s60, 
                                      y=point[2]+(1.2+t)*c60, 
                                      label=tick, 
-                                     size=3.5, 
+                                     size=annotation_tick_size, 
                                      angle=60)
       }
   }
@@ -343,7 +344,7 @@
                                      x=point[1]-(1.2+t)*s60, 
                                      y=point[2]-(1.2+t)*c60, 
                                      label=tick, 
-                                     size=3.5, 
+                                     size=annotation_tick_size, 
                                      angle=300)
       }
   }
