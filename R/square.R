@@ -2,7 +2,8 @@
 #' @import ggplot2
 .square <- function(axis_order, ticks, min_range, max_range, mindata, 
                     maxdata, axis_labels, fillcolor, alpha, linecolor, 
-                    linetype, lwd, title){
+                    linetype, lwd, annotation_tick_size, annotation_label_size, 
+                    title){
   
   # Plot axes number
   a1 <- as.integer(axis_order$axis1)
@@ -135,26 +136,26 @@
                              x=(line1[1]+line1[3])/2,
                              y=(line1[2]+line1[4])/2-2,
                              label=axis_labels[a1],
-                             size=5)
+                             size=annotation_label_size)
 
   p <- p + ggplot2::annotate(geom="text",
                              x=(line2[1]+line2[3])/2+2,
                              y=(line2[2]+line2[4])/2,
                              label=axis_labels[a2],
-                             size=5,
+                             size=annotation_label_size,
                              angle=90)
 
   p <- p + ggplot2::annotate(geom="text",
                              x=(line3[1]+line3[3])/2,
                              y=(line3[2]+line3[4])/2+2,
                              label=axis_labels[a3],
-                             size=5)
+                             size=annotation_label_size)
 
   p <- p + ggplot2::annotate(geom="text",
                              x=(line4[1]+line4[3])/2-2,
                              y=(line4[2]+line4[4])/2,
                              label=axis_labels[a4],
-                             size=5,
+                             size=annotation_label_size,
                              angle=90)
 
   ### Add ticks for each axis ###
@@ -173,7 +174,7 @@
                                      x=point[1],
                                      y=point[2]-t-0.7,
                                      label=tick,
-                                     size=3.5)
+                                     size=annotation_tick_size)
       }
   }
 
@@ -192,7 +193,7 @@
                                      x=point[1]+(0.7+t),
                                      y=point[2],
                                      label=tick,
-                                     size=3.5,
+                                     size=annotation_tick_size,
                                      angle=90)
       }
   }
@@ -211,7 +212,7 @@
                                      x=point[1],
                                      y=point[2]+(0.75+t),
                                      label=tick,
-                                     size=3.5)
+                                     size=annotation_tick_size)
       }
   }
 
@@ -229,7 +230,7 @@
                                      x=point[1]-(0.7+t),
                                      y=point[2],
                                      label=tick,
-                                     size=3.5,
+                                     size=annotation_tick_size,
                                      angle=90)
       }
   }
