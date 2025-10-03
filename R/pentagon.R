@@ -2,7 +2,8 @@
 #' @import ggplot2
 .pentagon <- function(axis_order, ticks, min_range, max_range, mindata, 
                       maxdata, axis_labels, fillcolor, alpha, linecolor,
-                      linetype, lwd, title){
+                      linetype, lwd, annotation_tick_size, annotation_label_size, 
+                      title){
   # Plot axes number
   a1 <- as.integer(axis_order$axis1)
   a2 <- as.integer(axis_order$axis2)
@@ -175,34 +176,34 @@
                              x=(line1[1]+line1[3])/2, 
                              y=(line1[2]+line1[4])/2-3, 
                              label=axis_labels[a1], 
-                             size=5)
+                             size=annotation_label_size)
   
   p <- p + ggplot2::annotate(geom="text", 
                              x=(line2[1]+line2[3])/2+3*s72,
                              y=(line2[2]+line2[4])/2-3*c72, 
                              label=axis_labels[a2], 
-                             size=5, 
+                             size=annotation_label_size, 
                              angle=72)
   
   p <- p + ggplot2::annotate(geom="text", 
                              x=(line3[1]+line3[3])/2+3*s36,
                              y=(line3[2]+line3[4])/2+3*c36, 
                              label=axis_labels[a3], 
-                             size=5, 
+                             size=annotation_label_size, 
                              angle=324)
   
   p <- p + ggplot2::annotate(geom="text", 
                              x=(line4[1]+line4[3])/2-3*s36,
                              y=(line4[2]+line4[4])/2+3*c36, 
                              label=axis_labels[a4], 
-                             size=5, 
+                             size=annotation_label_size, 
                              angle=36)
   
   p <- p + ggplot2::annotate(geom="text", 
                              x=(line5[1]+line5[3])/2-3*s72,
                              y=(line5[2]+line5[4])/2-3*c72, 
                              label=axis_labels[a5], 
-                             size=5, 
+                             size=annotation_label_size, 
                              angle=288)
 
   ### Add ticks for each axis ###
@@ -217,7 +218,7 @@
           p <- p + ggplot2::annotate(geom="text", 
                                      x=point[1], 
                                      y=point[2]-t-1.1, 
-                                     label=tick, size=3.5)
+                                     label=tick, size=annotation_tick_size)
       }
   }
 
@@ -235,7 +236,7 @@
                                      x=point[1]+(1.1+t)*s72, 
                                      y=point[2]-(1.1+t)*c72, 
                                      label=tick, 
-                                     size=3.5, 
+                                     size=annotation_tick_size, 
                                      angle=72)
       }
   }
@@ -254,7 +255,7 @@
                                      x=point[1]+(1.1+t)*s36, 
                                      y=point[2]+(1.1+t)*c36, 
                                      label=tick, 
-                                     size=3.5, 
+                                     size=annotation_tick_size, 
                                      angle=324)
       }
   }
@@ -273,7 +274,7 @@
                                      x=point[1]-(1.1+t)*s36, 
                                      y=point[2]+(1.1+t)*c36, 
                                      label=tick, 
-                                     size=3.5, 
+                                     size=annotation_tick_size, 
                                      angle=36)
       }
   }
@@ -292,7 +293,7 @@
                                      x=point[1]-(1.1+t)*s72, 
                                      y=point[2]-(1.1+t)*c72, 
                                      label=tick, 
-                                     size=3.5, 
+                                     size=annotation_tick_size, 
                                      angle=288)
       }
   }

@@ -164,7 +164,8 @@ polygonplot <- function(df, shape,
                    mindata, maxdata,
                    axis_labels,
                    fillcolor, alpha, linecolor,
-                   linetype, lwd, title)
+                   linetype, lwd, annotation_tick_size, annotation_label_size, 
+                   title)
   }
   else {
     p <- .hexagon(axis_order,
