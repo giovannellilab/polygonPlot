@@ -2,7 +2,8 @@
 #' @import ggplot2
 .triangle <- function(axis_order, ticks, min_range, max_range, mindata, 
                       maxdata, axis_labels, fillcolor, alpha, linecolor,
-                      linetype, lwd, title){
+                      linetype, lwd, annotation_tick_size, 
+                      annotation_label_size, title){
   # Plot axes number
   a1 <- as.integer(axis_order$axis1)
   a2 <- as.integer(axis_order$axis2)
@@ -124,20 +125,20 @@
                              x=(p11[1]+p12[1])/2, 
                              y=(p11[2]+p12[2])/2-2, 
                              label= axis_labels[a1], 
-                             size=5)
+                             size=annotation_label_size)
   
   p <- p + ggplot2::annotate(geom="text",  
                              x=(p21[1]+p22[1])/2+2*s60, 
                              y=(p21[2]+p22[2])/2+2*c60, 
                              label=axis_labels[a2], 
-                             size=5, 
+                             size=annotation_label_size, 
                              angle=300)
   
   p <- p + ggplot2::annotate(geom="text", 
                              x=(p31[1]+p32[1])/2-2*s60, 
                              y=(p31[2]+p32[2])/2+2*c60,
                              label=axis_labels[a3], 
-                             size=5, 
+                             size=annotation_label_size, 
                              angle=60)
 
   ### Add ticks for each axis ###
@@ -150,7 +151,7 @@
                                  y=point[2]-t+0.05, yend = point[2]-t-0.3)
       
       p <- p + ggplot2::annotate(geom="text", x=point[1], y=point[2]-t-0.65, 
-                                 label=tick, size=3.5)
+                                 label=tick, size=annotation_tick_size)
     }
   }
 
@@ -167,7 +168,8 @@
       p <- p + ggplot2::annotate(geom="text", 
                                  x=point[1]+(0.65+t)*s60, 
                                  y=point[2]+(0.65+t)*c60, 
-                                 label=tick, size=3.5, angle=300)
+                                 label=tick, size=annotation_tick_size, 
+                                 angle=300)
     }
   }
 
@@ -184,7 +186,8 @@
       p <- p + ggplot2::annotate(geom="text", 
                                  x=point[1]-(0.65+t)*s60, 
                                  y=point[2]+(0.65+t)*c60, 
-                                 label=tick, size=3.5, angle=60)
+                                 label=tick, size=annotation_tick_size, 
+                                 angle=60)
     }
   }
   

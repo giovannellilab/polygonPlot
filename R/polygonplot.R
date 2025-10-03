@@ -55,6 +55,8 @@ polygonplot <- function(df, shape,
                         linetype = "solid", 
                         lwd = 0.8, 
                         labels_axis = NULL,
+                        annotation_tick_size = 3.5,
+                        annotation_label_size = 5,
                         title = NULL, 
                         fix_aspect_ratio = TRUE){
   
@@ -142,7 +144,8 @@ polygonplot <- function(df, shape,
                    mindata, maxdata,
                    axis_labels,
                    fillcolor, alpha, linecolor,
-                   linetype, lwd, title)
+                   linetype, lwd, annotation_tick_size, annotation_label_size,
+                   title)
   } 
   else if (shape == 4){
     p <- .square(axis_order,
