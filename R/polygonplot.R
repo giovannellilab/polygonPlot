@@ -21,6 +21,8 @@
 #' @param linetype line type of the polygon border
 #' @param lwd line width of the polygon border
 #' @param labels_axis vector with the desired labels of the axis
+#' @param annotation_tick_size size of tick marks along the polygon axes
+#' @param annotation_label_size size of the labels displayed along the polygon axes
 #' @param title title of the plot
 #' @param fix_aspect_ratio Boolean flag to fix the aspect ratio of the plot as 
 #' `1`. It is strongly recommended to leave it as default value `TRUE`. 
