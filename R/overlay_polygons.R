@@ -14,7 +14,9 @@
 #' @import checkmate
 #' @import ggplot2
 
-overlay_polygons <- function(plot_list, label_list, matching_color_points=FALSE) {
+overlay_polygons <- function(plot_list, label_list, 
+                             matching_color_points=FALSE,
+                             legend_title = "Overlay Polygons") {
   checkmate::assertList(plot_list, types = "ggplot")
   checkmate::assertCharacter(label_list, len = length(plot_list), 
                              null.ok = FALSE, any.missing = FALSE)
@@ -64,9 +66,9 @@ overlay_polygons <- function(plot_list, label_list, matching_color_points=FALSE)
       data=m,
       aes(x=get("x"), y=get("y"), color=get("plot_labels"))
     ) +
-    ggplot2::scale_fill_manual(values = fil) + 
-    ggplot2::scale_alpha_manual(values = al) + 
-    ggplot2::scale_colour_manual(values = col)
+    ggplot2::scale_fill_manual(values = fil, name = legend_title) + 
+    ggplot2::scale_alpha_manual(values = al, name = legend_title) + 
+    ggplot2::scale_colour_manual(values = col, name = legend_title)
   
   if(matching_color_points) {
     master_plot <- master_plot + 
