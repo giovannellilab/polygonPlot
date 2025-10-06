@@ -70,6 +70,8 @@ polygonplot <- function(df, shape,
                                       "dotdash", "longdash", "twodash"))
   checkmate::assertDouble(lwd)
   checkmate::assertVector(labels_axis, len = shape, null.ok = TRUE)
+  checkmate::assertDouble(annotation_label_size)
+  checkmate::assertDouble(annotation_tick_size)
   checkmate::assertCharacter(title, null.ok = TRUE)
   checkmate::assertFlag(fix_aspect_ratio)
   
