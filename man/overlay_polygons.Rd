@@ -4,7 +4,13 @@
 \alias{overlay_polygons}
 \title{Overlay different polygon plots on the same axis}
 \usage{
-overlay_polygons(plot_list, label_list, matching_color_points = FALSE)
+overlay_polygons(
+  plot_list,
+  label_list,
+  matching_color_points = FALSE,
+  legend_title = "Overlay Polygons",
+  include_mean_lines = FALSE
+)
 }
 \arguments{
 \item{plot_list}{is a list object containing a series of polygon plots
@@ -15,6 +21,11 @@ overlay_polygons(plot_list, label_list, matching_color_points = FALSE)
 
 \item{matching_color_points}{is a boolean specifying whether the points
 should be colored according to \code{label_list}}
+
+\item{legend_title}{title of the legend}
+
+\item{include_mean_lines}{logical flag indicating whether to include mean
+lines in the overlaid polygons}
 }
 \value{
 a ggplot2 object

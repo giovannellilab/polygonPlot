@@ -14,6 +14,8 @@ polygonplot(
   linetype = "solid",
   lwd = 0.8,
   labels_axis = NULL,
+  annotation_tick_size = 3.5,
+  annotation_label_size = 5,
   title = NULL,
   fix_aspect_ratio = TRUE
 )
@@ -48,6 +50,10 @@ but don't leave them empty.}
 \item{lwd}{line width of the polygon border}
 
 \item{labels_axis}{vector with the desired labels of the axis}
+
+\item{annotation_tick_size}{size of tick marks along the polygon axes}
+
+\item{annotation_label_size}{size of the labels displayed along the polygon axes}
 
 \item{title}{title of the plot}
 
