@@ -1,7 +1,7 @@
 Package: polygonPlot
 Title: Polygon Plot to describe the multivariate range visualization with polygons
-Version: 1.0.0
-Date: 2024-05-07
+Version: 1.0.1
+Date: 2025-10-06
 Authors@R: c(
     person("Davide", "Corso", role = c("aut", "cre"),
            email = "davidecrs92@gmail.com",
@@ -20,7 +20,7 @@ BugReports: https://github.com/giovannellilab/polygonPlot/issues
 Encoding: UTF-8
 LazyData: FALSE
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.3
 Imports:
     checkmate,
     ggplot2,
