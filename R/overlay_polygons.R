@@ -7,6 +7,9 @@
 #' `plot_list` object
 #' @param matching_color_points is a boolean specifying whether the points
 #' should be colored according to `label_list`
+#' @param legend_title title of the legend
+#' @param include_mean_lines logical flag indicating whether to include mean 
+#' lines in the overlaid polygons
 #'
 #' @return a ggplot2 object
 #' @export
@@ -14,7 +17,8 @@
 #' @import checkmate
 #' @import ggplot2
 
-overlay_polygons <- function(plot_list, label_list, 
+overlay_polygons <- function(plot_list, 
+                             label_list, 
                              matching_color_points=FALSE,
                              legend_title = "Overlay Polygons",
                              include_mean_lines = FALSE) {
