@@ -16,7 +16,8 @@
 
 overlay_polygons <- function(plot_list, label_list, 
                              matching_color_points=FALSE,
-                             legend_title = "Overlay Polygons") {
+                             legend_title = "Overlay Polygons",
+                             include_mean_lines = FALSE) {
   checkmate::assertList(plot_list, types = "ggplot")
   checkmate::assertCharacter(label_list, len = length(plot_list), 
                              null.ok = FALSE, any.missing = FALSE)
@@ -30,8 +31,15 @@ overlay_polygons <- function(plot_list, label_list,
   # Removing Geom Polygon from the first plot. 
   first_plot$layers[[1]] <- NULL
   
+  # WARNING: Remove Mean Line Layer which is the last one
+  if(!include_mean_lines) {
+    first_plot$layers[[length(first_plot$layers)]] <- NULL
+  }
+  
   m <- gb1$data[[2]]
   m$plot_labels <- label_list[[1]]
+  
+  df_meanline <- data.frame()
   
   for(i in seq.int(from=2, to=length(plot_list))){
     gbX <- ggplot2::ggplot_build(plot_list[[i]])
@@ -39,6 +47,11 @@ overlay_polygons <- function(plot_list, label_list,
     
     # Append polygon and point info
     m <- rbind(m, gbX$data[[2]])
+    
+    if (include_mean_lines) {
+      # Appena meanline info
+      df_meanline <- rbind(df_meanline, gbX$data[[length(gbX$data)]])
+    }
   }
   
   fil <- as.character(m$fill)
@@ -80,6 +93,17 @@ overlay_polygons <- function(plot_list, label_list,
   } else {
     master_plot <- master_plot + 
       ggplot2::geom_point(data=m, aes(x=get("x"), y=get("y")))
+  }
+  
+  if (include_mean_lines) {
+    master_plot <- master_plot + 
+      ggplot2::geom_polygon(data=df_meanline,
+                            aes(x=get("x"), y=get("y")), 
+                            fill="darkgrey",
+                            colour="darkgrey",
+                            alpha=0.0,
+                            linetype=1,
+                            linewidth=0.5)
   }
   
   master_plot <- master_plot + ggplot2::ggtitle("")
