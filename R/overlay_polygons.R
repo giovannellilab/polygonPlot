@@ -21,6 +21,10 @@ overlay_polygons <- function(plot_list, label_list,
   checkmate::assertList(plot_list, types = "ggplot")
   checkmate::assertCharacter(label_list, len = length(plot_list), 
                              null.ok = FALSE, any.missing = FALSE)
+  checkmate::assertString(legend_title)
+  checkmate::assertFlag(include_mean_lines)
+  checkmate::assertFlag(matching_color_points)
+  
   
   first_plot <- plot_list[[1]]
   # Get the ggplot build from the first plot
