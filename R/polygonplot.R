@@ -57,6 +57,7 @@ polygonplot <- function(df, shape,
                         linetype = "solid", 
                         lwd = 0.8, 
                         labels_axis = NULL,
+                        mean_line_color="darkgrey",
                         annotation_tick_size = 3.5,
                         annotation_label_size = 5,
                         title = NULL, 
@@ -148,7 +149,8 @@ polygonplot <- function(df, shape,
                    mindata, maxdata,
                    axis_labels,
                    fillcolor, alpha, linecolor,
-                   linetype, lwd, annotation_tick_size, annotation_label_size,
+                   linetype, lwd, mean_line_color,
+                   annotation_tick_size, annotation_label_size,
                    title)
   } 
   else if (shape == 4){
@@ -158,7 +160,8 @@ polygonplot <- function(df, shape,
                  mindata, maxdata,
                  axis_labels,
                  fillcolor, alpha, linecolor,
-                 linetype, lwd, annotation_tick_size, annotation_label_size,
+                 linetype, lwd, mean_line_color,
+                 annotation_tick_size, annotation_label_size,
                  title)
   }
   else if (shape == 5) {
@@ -168,7 +171,8 @@ polygonplot <- function(df, shape,
                    mindata, maxdata,
                    axis_labels,
                    fillcolor, alpha, linecolor,
-                   linetype, lwd, annotation_tick_size, annotation_label_size, 
+                   linetype, lwd, mean_line_color,
+                   annotation_tick_size, annotation_label_size, 
                    title)
   }
   else {
@@ -178,7 +182,8 @@ polygonplot <- function(df, shape,
                   mindata, maxdata,
                   axis_labels,
                   fillcolor, alpha, linecolor,
-                  linetype, lwd, annotation_tick_size, annotation_label_size, 
+                  linetype, lwd, mean_line_color,
+                  annotation_tick_size, annotation_label_size, 
                   title)
   }
   
