@@ -2,8 +2,8 @@
 #' @import ggplot2
 .square <- function(axis_order, ticks, min_range, max_range, mindata, 
                     maxdata, axis_labels, fillcolor, alpha, linecolor, 
-                    linetype, lwd, annotation_tick_size, annotation_label_size, 
-                    title){
+                    linetype, lwd, mean_line_color,
+                    annotation_tick_size, annotation_label_size, title){
   
   # Plot axes number
   a1 <- as.integer(axis_order$axis1)
@@ -236,7 +236,7 @@
   }
 
   # Add mean polygon
-  p = p + .draw_mean_polygon(df_coord)
+  p = p + .draw_mean_lines(df_coord, mean_line_color)
   
   # Print perimeter and area
   message(sprintf("Perimeter: %5.2f", .get_perimeter(df_coord)))
