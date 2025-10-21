@@ -27,6 +27,7 @@
 #' Plots the mean lines
 #' 
 #' @param df Data frame containing the coordinates in two columns: x and y
+#' @param mean_line_color color of the mean line inside the polygon
 #' 
 #' @return The mean lines as a `ggplot2` object.
 #' 
@@ -41,7 +42,7 @@
   mean_df = .get_mean_coords(df)
   
   p <- ggplot2::geom_path(data=mean_df,
-                            aes(x=x, y=y),
+                            aes(x=get("x"), y=get("y")),
                             colour=mean_line_color,
                             linetype=1,
                             linewidth=0.5)

@@ -12,6 +12,7 @@
 #' @return a ggplot2 object
 #' @export
 #'
+#' @importFrom stats setNames
 #' @import checkmate
 #' @import ggplot2
 
@@ -60,16 +61,17 @@ overlay_polygons <- function(plot_list, label_list,
     
     master_plot <- master_plot +
       ggplot2::geom_polygon(data=df,
-                            aes(x=x, y=y, group=plot_labels, 
-                                fill=plot_labels, 
-                                colour=plot_labels,
-                                alpha=plot_labels),
+                            aes(x=get("x"), y=get("y"),group=get("plot_labels"), 
+                                fill=get("plot_labels"),
+                                colour=get("plot_labels"),
+                                alpha=get("plot_labels")),
                             linewidth = unique(df$linewidth)) +
       ggplot2::geom_point(data=df,
-                          aes(x=x, y=y, color=plot_labels),
+                          aes(x=get("x"), y=get("y"), color=get("plot_labels")),
                           show.legend = FALSE) +
-      if (include_mean_lines) geom_path(data=df_ml, aes(x=x, y=y, 
-                                                        group=plt_labels), 
+      if (include_mean_lines) geom_path(data=df_ml, 
+                                        aes(x=get("x"), y=get("y"),
+                                            group=get("plt_labels")), 
                                         colour=df_ml$colour,
                                         linetype=1,
                                         linewidth=0.5,
