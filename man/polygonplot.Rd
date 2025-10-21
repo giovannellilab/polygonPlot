@@ -14,6 +14,7 @@ polygonplot(
   linetype = "solid",
   lwd = 0.8,
   labels_axis = NULL,
+  mean_line_color = "darkgrey",
   annotation_tick_size = 3.5,
   annotation_label_size = 5,
   title = NULL,

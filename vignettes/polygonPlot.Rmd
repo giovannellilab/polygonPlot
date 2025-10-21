@@ -144,7 +144,7 @@ plot_triangle
 ### Shape: 4 - Square
 
 ```{r fig.width=7, fig.height=7}
-plot_square <- polygonplot(df, shape = 4, fillcolor = "#57cc99", linecolor = "#38a3a5")
+plot_square <- polygonplot(df, shape = 4, fillcolor = "#57cc99", linecolor = "#38a3a5", annotation_label_size = 8)
 plot_square
 ```
 
@@ -158,7 +158,8 @@ plot_pentagon
 ### Shape: 6 - Hexagon
 
 ```{r fig.width=7, fig.height=7}
-plot_hexagon <- polygonplot(df, shape = 6, fillcolor = "#0077b6", linecolor = "#023e8a")
+plot_hexagon <- polygonplot(df, shape = 6, fillcolor = "#0077b6", linecolor = "#023e8a", 
+                            annotation_label_size = 8)
 plot_hexagon
 ```
 

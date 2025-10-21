@@ -7,7 +7,6 @@
 overlay_polygons(
   plot_list,
   label_list,
-  matching_color_points = FALSE,
   legend_title = "Overlay Polygons",
   include_mean_lines = FALSE
 )
@@ -18,9 +17,6 @@ overlay_polygons(
 
 \item{label_list}{is a vector of strings. Must have the same length of
 \code{plot_list} object}
-
-\item{matching_color_points}{is a boolean specifying whether the points
-should be colored according to \code{label_list}}
 
 \item{legend_title}{title of the legend}
 
