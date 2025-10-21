@@ -5,8 +5,6 @@
 #' (ggplot2 object). All the polygon plot should be drawn on the same axis range
 #' @param label_list is a vector of strings. Must have the same length of 
 #' `plot_list` object
-#' @param matching_color_points is a boolean specifying whether the points
-#' should be colored according to `label_list`
 #' @param legend_title title of the legend
 #' @param include_mean_lines logical flag indicating whether to include mean 
 #' lines in the overlaid polygons
@@ -17,104 +15,75 @@
 #' @import checkmate
 #' @import ggplot2
 
-overlay_polygons <- function(plot_list, 
-                             label_list, 
-                             matching_color_points=FALSE,
-                             legend_title = "Overlay Polygons",
+overlay_polygons <- function(plot_list, label_list, 
+                             legend_title = "Overlay Polygons", 
                              include_mean_lines = FALSE) {
   checkmate::assertList(plot_list, types = "ggplot")
   checkmate::assertCharacter(label_list, len = length(plot_list), 
                              null.ok = FALSE, any.missing = FALSE)
   checkmate::assertString(legend_title)
   checkmate::assertFlag(include_mean_lines)
-  checkmate::assertFlag(matching_color_points)
-  
   
   first_plot <- plot_list[[1]]
-  # Get the ggplot build from the first plot
-  gb1 <- ggplot2::ggplot_build(first_plot)
   
   # Removing Geom Points from the first plot. Now Polygon will be the first layer
   first_plot$layers[[1]] <- NULL
   # Removing Geom Polygon from the first plot. 
   first_plot$layers[[1]] <- NULL
   
-  # WARNING: Remove Mean Line Layer which is the last one
   if(!include_mean_lines) {
     first_plot$layers[[length(first_plot$layers)]] <- NULL
   }
   
-  m <- gb1$data[[2]]
-  m$plot_labels <- label_list[[1]]
+  all_polygons <- list()
+  all_meanlines <- list()
   
-  df_meanline <- data.frame()
-  
-  for(i in seq.int(from=2, to=length(plot_list))){
-    gbX <- ggplot2::ggplot_build(plot_list[[i]])
-    gbX$data[[2]]$plot_labels <- label_list[[i]]
+  for(i in seq.int(from=1, to=length(plot_list))) {
+    gbX <- ggplot_build(plot_list[[i]])
     
-    # Append polygon and point info
-    m <- rbind(m, gbX$data[[2]])
+    # Assumiamo che il poligono sia nel secondo layer
+    m <- gbX$data[[2]]  
+    m$plot_labels <- label_list[[i]]  # etichetta
     
-    if (include_mean_lines) {
-      # Appena meanline info
-      df_meanline <- rbind(df_meanline, gbX$data[[length(gbX$data)]])
-    }
+    all_polygons[[i]] <- m
+    
+    df_meanline <- gbX$data[[length(gbX$data)]]
+    df_meanline$plt_labels <- label_list[[i]]
+    all_meanlines[[i]] <- df_meanline
   }
   
-  fil <- as.character(m$fill)
-  names(fil) <- as.character(m$plot_labels)
+  master_plot <- first_plot
   
-  al = m$alpha
-  names(al) <- as.character(m$plot_labels)
-  
-  col <- as.character(m$colour)
-  names(col) <- as.character(m$plot_labels)
-
-  master_plot <- first_plot +
-    ggplot2::geom_polygon(
-      data=m,
-      aes(
-        x=get("x"),
-        y=get("y"),
-        fill=get("plot_labels"),
-        alpha=get("plot_labels"),
-        colour=get("plot_labels")
-      ), 
-      linewidth = unique(m$linewidth)
-    ) +
-    ggplot2::geom_point(
-      data=m,
-      aes(x=get("x"), y=get("y"), color=get("plot_labels"))
-    ) +
-    ggplot2::scale_fill_manual(values = fil, name = legend_title) + 
-    ggplot2::scale_alpha_manual(values = al, name = legend_title) + 
-    ggplot2::scale_colour_manual(values = col, name = legend_title)
-  
-  if(matching_color_points) {
-    master_plot <- master_plot + 
-      ggplot2::geom_point(
-        data=m,
-        aes(x=get("x"), y=get("y"), color=get("plot_labels"))
-      ) + 
-      ggplot2::scale_color_manual(values = fil)
-  } else {
-    master_plot <- master_plot + 
-      ggplot2::geom_point(data=m, aes(x=get("x"), y=get("y")))
+  for(i in seq.int(from=1, to=length(plot_list))) {
+    df <- all_polygons[[i]]
+    df_ml <- all_meanlines[[i]]
+    
+    master_plot <- master_plot +
+      ggplot2::geom_polygon(data=df,
+                            aes(x=x, y=y, group=plot_labels, 
+                                fill=plot_labels, 
+                                colour=plot_labels,
+                                alpha=plot_labels),
+                            linewidth = unique(df$linewidth)) +
+      ggplot2::geom_point(data=df,
+                          aes(x=x, y=y, color=plot_labels),
+                          show.legend = FALSE) +
+      if (include_mean_lines) geom_path(data=df_ml, aes(x=x, y=y, 
+                                                        group=plt_labels), 
+                                        colour=df_ml$colour,
+                                        linetype=1,
+                                        linewidth=0.5,
+                                        show.legend = FALSE) else NULL
   }
   
-  if (include_mean_lines) {
-    master_plot <- master_plot + 
-      ggplot2::geom_polygon(data=df_meanline,
-                            aes(x=get("x"), y=get("y")), 
-                            fill="darkgrey",
-                            colour="darkgrey",
-                            alpha=0.0,
-                            linetype=1,
-                            linewidth=0.5)
-  }
+  fil <- setNames(sapply(all_polygons, function(d) unique(d$fill)), label_list)
+  col <- setNames(sapply(all_polygons, function(d) unique(d$colour)),label_list)
+  al <- setNames(sapply(all_polygons, function(d) unique(d$alpha)), label_list)
   
-  master_plot <- master_plot + ggplot2::ggtitle("")
+  master_plot <- master_plot +
+    ggplot2::scale_fill_manual(values = fil, name = legend_title) +
+    ggplot2::scale_colour_manual(values = col, name = legend_title) +
+    ggplot2::scale_alpha_manual(values = al, name = legend_title)
   
   return(master_plot)
 }
