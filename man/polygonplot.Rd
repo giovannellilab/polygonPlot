@@ -52,6 +52,8 @@ but don't leave them empty.}
 
 \item{labels_axis}{vector with the desired labels of the axis}
 
+\item{mean_line_color}{color of the mean line inside the polygon}
+
 \item{annotation_tick_size}{size of tick marks along the polygon axes}
 
 \item{annotation_label_size}{size of the labels displayed along the polygon axes}

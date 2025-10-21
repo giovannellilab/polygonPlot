@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{df}{Data frame containing the coordinates in two columns: x and y}
+
+\item{mean_line_color}{color of the mean line inside the polygon}
 }
 \value{
 The mean lines as a \code{ggplot2} object.
