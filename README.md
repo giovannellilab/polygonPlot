@@ -1,12 +1,25 @@
-# Polygons Plot
-Welcome to the repository describing the multivariate range visualization Polygons plot! Polygons plot are designed to show 3 to 6 variables simultaneously showcase the min-max and average for each. Polygons plot have been ideated by Donato Giovannelli. Visit Donato Giovannelli laboratory website at [www.donatogiovannelli.com](htpps://www.donatogiovannelli.com).
 
-A complete explanation of How Polygons plot work and how to use them can be found at [giovannellilab.github.io/polygonPlot/](https://giovannellilab.github.io/polygonPlot/). We have also a _beta_ Shiny app built by [Fang Huang](https://people.csiro.au/H/F/f-huang) than can be used right now to create Polygons plot and download them as _.png_ or _.svg_. You can find the _beta_ of the app here: [fanghuang.shinyapps.io/DonatoPlot/](https://fanghuang.shinyapps.io/DonatoPlot/). We are working on a R package to be able to make Polygons plot easily and add some of the functionalities we have imagined discussing these plots with Shaunna Morrison, Fang Huang and Anirudh Prabhu. Get in touch if you want to help!
+# polygonPlot
 
-**A word of caution**: A Polygon plot [_singular_ Polygon plot, _plural_ Polygons plot], while it defines a space on a plane that can be used for algebraic operations to work on a series of plots (called a polygons plot array), it does not define the state space of the possible combinations of the visualized variables. Visualizing the polygon plot as the state space of possible instances might seem like an intuitive thing to do, but it is inherently _**wrong**_! You are have been warned!
+[![R-CMD-check](https://github.com/giovannellilab/polygonPlot/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovannellilab/polygonPlot/actions/workflows/R-CMD-check.yaml)
+[![Project Status: Active - The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+<!-- badges: end -->
 
->Fun fact! My friends refer to these plots as "Donato's plots"!
+The R package **polygonPlot** is designed to
+visualize multivariate ranges as opposite to single data points. The
+concept of `polygons plot` was design by [Donato
+Giovannelli](https://www.donatogiovannelli.com/) in late 2018 while
+working on our review [Living at the Extremes: Extremophiles and the
+Limits of Life in a Planetary
+Context](https://doi.org/10.3389/fmicb.2019.00780), published in 2019 in
+Frontiers in Microbiology.
 
-<img src="https://www.frontiersin.org/files/Articles/447668/fmicb-10-00780-HTML-r2/image_m/fmicb-10-00780-g002.jpg" class="img-responsive" alt="Merino_et_al_2019_polygon_plot">
 
->The first polygons plot appeared in [Merino et al. 2019 Frontiers in Microbiology](https://www.frontiersin.org/articles/10.3389/fmicb.2019.00780/full)
+## Documentation
+
+A complete code vignette and documentation can be found at
+<https://giovannellilab.github.io/polygonPlot/>.
+
