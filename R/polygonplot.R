@@ -45,12 +45,12 @@
 #'   data4=c(0, 50, 20, 40)
 #' )
 #' 
-#' p <- polygonplot(df, shape=4, fillcolor = "dodgerblue", linecolor = "blue")
+#' p <- polygonPlot(df, shape=4, fillcolor = "dodgerblue", linecolor = "blue")
 #' p 
 #'
 #' @import checkmate
 #' @export
-polygonplot <- function(df, shape, 
+polygonPlot <- function(df, shape, 
                         extra = 0.5,
                         fillcolor = "black", 
                         alpha = 0.5,
