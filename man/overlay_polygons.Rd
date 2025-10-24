@@ -12,8 +12,10 @@ overlay_polygons(
 )
 }
 \arguments{
-\item{plot_list}{is a list object containing a series of polygon plots
-(ggplot2 object). All the polygon plot should be drawn on the same axis range}
+\item{plot_list}{a list of polygon plots (ggplot2 objects).
+All plots should use the same axis ranges.
+The order of plots in this list determines which polygons appear in the
+foreground and which are in the background.}
 
 \item{label_list}{is a vector of strings. Must have the same length of
 \code{plot_list} object}
