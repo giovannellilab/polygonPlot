@@ -1,6 +1,6 @@
 Package: polygonPlot
 Title: Polygon Plot to describe the multivariate range visualization with polygons
-Version: 1.2.2
+Version: 1.2.3
 Date: 2025-10-24
 Authors@R: c(
     person("Davide", "Corso", role = c("aut", "cre"),
