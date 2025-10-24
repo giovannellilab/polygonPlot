@@ -17,7 +17,6 @@ author:
     affiliation:
     - University of Naples Federico II
     email: donato.giovannelli@unina.it
-# output: rmarkdown::html_vignette
 output:
   rmarkdown::html_vignette:
     toc: true
