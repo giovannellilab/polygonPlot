@@ -17,7 +17,11 @@ author:
     affiliation:
     - University of Naples Federico II
     email: donato.giovannelli@unina.it
-output: rmarkdown::html_vignette
+# output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 4
 date: "`r Sys.Date()`"
 vignette: >
   %\VignetteIndexEntry{polygonPlot}
@@ -70,7 +74,68 @@ Just be sure that the input object is `data.frame` type.
 
 In both cases, the function returns a ggplot2 object, which includes the mean points of each axis connected by lines.
 
-## 1. Expected data.frame format Structure
+### 1. Expected data.frame format structure
+
+the input `data.frame` should be composed as follows:
+
+  * The first column should contain the strings `axis_min`, `axis_max` and `data` 
+in that row order.
+  * All the columns, starting from the second, must be dedicated to the variables
+of interest. In particular, the first two rows should contain the values for the 
+`axis_min` and `axis_max` respectively. 
+    * If left empty, the axis_min/max will be automatically calculated based on data given and 
+extension will be decided based on the Axes range extension (`extra` parameter).
+  * Starting from the third row, each variable column must contain all the data values.
+  * As default, column names will be used as labels of the axis 
+(starting from the second one). Change them in order to change the labels, 
+but don't leave them empty.
+
+Examples of an input `data.frame`
+```{r load-data}
+df <- read.csv(system.file(file.path("extdata", "example.csv"), package="polygonPlot"))
+df
+```
+
+a minimal version
+```{r load-data-minimal}
+
+df <- read.csv(
+  system.file(
+    file.path(
+      "extdata",
+      "minimal_example.csv"
+    ), 
+    package="polygonPlot"
+  )
+)
+
+df
+```
+
+
+### 2. Classic data.frame structure
+
+If you have a classic `data.frame`, you can prepare it with the function that we have created
+
+```{r}
+classic_df <- data.frame(
+  data1=c(-300, 500, 300, 350),
+  data2=c(4, 14, -2, 12),
+  data3=c(0, 1000, 10, 50),
+  data4=c(0, 50, 20, 40)
+)
+
+formatted_df <- polygonPlot::prepare_dataframe(classic_df)
+
+# Through this function it becomes the first type of input
+formatted_df
+```
+
+
+
+
+## Polygons
+
 ### Input Parameters
 #### Required
 
@@ -118,51 +183,6 @@ keep the text and the relative ticks aligned on the axis.
 See the section `About the aspect.ratio` for a practical example.
 
 
-Examples of an input `data.frame`
-```{r load-data}
-df <- read.csv(system.file(file.path("extdata", "example.csv"), package="polygonPlot"))
-df
-```
-
-a minimal version
-```{r load-data-minimal}
-
-df <- read.csv(
-  system.file(
-    file.path(
-      "extdata",
-      "minimal_example.csv"
-    ), 
-    package="polygonPlot"
-  )
-)
-
-df
-```
-
-
-## 2. Classic data.frame structure
-
-In this case, you can use a regular data.frame as input and convert it using a helper function that prepares it for plotting.
-
-```{r}
-classic_df <- data.frame(
-  data1=c(-300, 500, 300, 350),
-  data2=c(4, 14, -2, 12),
-  data3=c(0, 1000, 10, 50),
-  data4=c(0, 50, 20, 40)
-)
-
-formatted_df <- polygonPlot::prepare_dataframe(classic_df)
-
-# Through this function it becomes the first type of input
-formatted_df
-```
-
-
-
-
-## Polygons
 ### Shape: 3 - Triangle
 
 ```{r fig.width=7, fig.height=7}
@@ -195,7 +215,7 @@ plot_hexagon
 ```
 
 
-## About the `aspect.ratio`
+### About the `aspect.ratio`
 
 Since `polygonPlot` returns a `ggplot2` object, the aspect ratio must be fixed to preserve the geometry of the polygon.  
 When applying a custom theme, always include `theme(aspect.ratio = 1)` to maintain alignment between axes and labels.
@@ -206,7 +226,7 @@ plot_pentagon + theme_bw() + theme(aspect.ratio = 1)
 ```
 
 
-### Overlay multiple polygons in one figure
+## Overlay multiple polygons in one figure
 To perform this task, the polygons must be pre-generated, each sharing the same minimum and maximum values of the axes.
 This ensures that all polygons are drawn on a consistent scale, allowing for direct and meaningful visual comparison between datasets.
 
