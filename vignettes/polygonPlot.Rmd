@@ -18,6 +18,7 @@ author:
     - University of Naples Federico II
     email: donato.giovannelli@unina.it
 output: rmarkdown::html_vignette
+date: "`r Sys.Date()`"
 vignette: >
   %\VignetteIndexEntry{polygonPlot}
   %\VignetteEngine{knitr::rmarkdown}
@@ -35,15 +36,15 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-Polygon Plot is designed to visualize multivariate ranges as opposite to single
-data points and it is able to show 3 to 6 variables simultaneously showcase the 
-min-max and average for each. The concept of _polygon plot_ was developed by 
-[Donato Giovannelli](https://www.donatogiovannelli.com/).
+_polygonPlot_ is an R package for visualizing multivariate ranges using 
+polygon-based representations.
+Unlike traditional scatter or radar plots that display individual data points, 
+polygonPlot allows users to display min–max intervals and mean values across 3 to 6 variables simultaneously.
 
 # Installation
 
 You can install `polygonPlot` with the following code:
-.
+
 ```{r, eval=FALSE}
 devtools::install_github("giovannellilab/polygonPlot")
 ```
@@ -58,11 +59,22 @@ library(polygonPlot)
 library(ggplot2)
 ```
 
+## Data Input Formats
 
-## Input Parameters
-### Required
+There are two types of input accepted by the polygonPlot function.
 
-The `polygonplot` function requires two mandatory parameters: 
+1. The expected data.frame format of the function
+2. Classic data.frame format.
+
+Just be sure that the input object is `data.frame` type.
+
+In both cases, the function returns a ggplot2 object, which includes the mean points of each axis connected by lines.
+
+## 1. Expected data.frame format Structure
+### Input Parameters
+#### Required
+
+The `polygonPlot` function requires two mandatory parameters: 
 
 * __`df`__: the input `data.frame` that should be composed as follows:
   * The first column should contain the strings `axis_min`, `axis_max` and `data` 
@@ -77,7 +89,6 @@ extension will be decided based on the Axes range extension (`extra` parameter).
 (starting from the second one). Change them in order to change the labels, 
 but don't leave them empty.
 
-
 * __`shape`__: the `integer` value indicating the shape of the polygon. 
 Available numbers:
   * `3` for _Triangle_
@@ -85,8 +96,29 @@ Available numbers:
   * `5` for _Pentagon_
   * `6` for _Hexagon_
 
+#### Optional
 
-Examples of the input `data.frame`
+* __`extra`__:  axis range extension
+* __`fillcolor`__ fill color of the polygon
+* __`alpha`__ alpha value of the fill color
+* __`linecolor`__ line color of the polygon border
+* __`linetype`__ line type of the polygon border
+* __`lwd`__ line width of the polygon border
+* __`labels_axis`__ vector with the desired labels of the axis
+* __`mean_line_color`__ color of the mean line inside the polygon
+* __`annotation_tick_size`__ size of tick marks along the polygon axes
+* __`annotation_label_size`__ size of the labels displayed along the polygon axes
+* __`title`__ title of the plot
+* __`fix_aspect_ratio`__ boolean flag to fix the aspect ratio of the plot as 
+`1`. It is strongly recommended to leave it as default value `TRUE`. 
+  * __NOTE__: If you are going to change the theme of the returned ggplot object, remember to put in 
+the `theme` function the following code `aspect.ratio = 1` in order to 
+keep the text and the relative ticks aligned on the axis. 
+
+See the section `About the aspect.ratio` for a practical example.
+
+
+Examples of an input `data.frame`
 ```{r load-data}
 df <- read.csv(system.file(file.path("extdata", "example.csv"), package="polygonPlot"))
 df
@@ -108,34 +140,33 @@ df <- read.csv(
 df
 ```
 
-### Optional
 
-* __`extra`__:  axis range extension
-* __`fillcolor`__ fill color of the polygon
-* __`alpha`__ alpha value of the fill color
-* __`linecolor`__ line color of the polygon border
-* __`linetype`__ line type of the polygon border
-* __`lwd`__ line width of the polygon border
-* __`labels_axis`__ vector with the desired labels of the axis
-* __`title`__ title of the plot
-* __`fix_aspect_ratio`__ boolean flag to fix the aspect ratio of the plot as 
-`1`. It is strongly recommended to leave it as default value `TRUE`. 
-  * __NOTE__: If you are going to change the theme of the returned ggplot object, remember to put in 
-the `theme` function the following code `aspect.ratio = 1` in order to 
-keep the text and the relative ticks aligned on the axis. 
+## 2. Classic data.frame structure
 
-See the section `About the aspect.ratio` for a practical example.
+In this case, you can use a regular data.frame as input and convert it using a helper function that prepares it for plotting.
 
-## Return
+```{r}
+classic_df <- data.frame(
+  data1=c(-300, 500, 300, 350),
+  data2=c(4, 14, -2, 12),
+  data3=c(0, 1000, 10, 50),
+  data4=c(0, 50, 20, 40)
+)
 
-* __`ggplot2`__ object.
+formatted_df <- polygonPlot::prepare_dataframe(classic_df)
+
+# Through this function it becomes the first type of input
+formatted_df
+```
+
+
 
 
 ## Polygons
 ### Shape: 3 - Triangle
 
 ```{r fig.width=7, fig.height=7}
-plot_triangle <- polygonplot(df, shape = 3, fillcolor = "#e56b6f", linecolor = "#b56576",
+plot_triangle <- polygonPlot(df, shape = 3, fillcolor = "#e56b6f", linecolor = "#b56576",
                              labels_axis = c("earth", "moon", "sun"))
 plot_triangle
 ```
@@ -144,36 +175,151 @@ plot_triangle
 ### Shape: 4 - Square
 
 ```{r fig.width=7, fig.height=7}
-plot_square <- polygonplot(df, shape = 4, fillcolor = "#57cc99", linecolor = "#38a3a5", annotation_label_size = 8)
+plot_square <- polygonPlot(df, shape = 4, fillcolor = "#57cc99", linecolor = "#38a3a5", annotation_label_size = 8)
 plot_square
 ```
 
 ### Shape: 5 - Pentagon
 
 ```{r fig.width=7, fig.height=7}
-plot_pentagon <- polygonplot(df, shape = 5, fillcolor = "#c89f9c", linecolor = "#b36a5e")
+plot_pentagon <- polygonPlot(df, shape = 5, fillcolor = "#c89f9c", linecolor = "#b36a5e")
 plot_pentagon
 ```
 
 ### Shape: 6 - Hexagon
 
 ```{r fig.width=7, fig.height=7}
-plot_hexagon <- polygonplot(df, shape = 6, fillcolor = "#0077b6", linecolor = "#023e8a", 
+plot_hexagon <- polygonPlot(df, shape = 6, fillcolor = "#0077b6", linecolor = "#023e8a", 
                             annotation_label_size = 8)
 plot_hexagon
 ```
 
 
 ## About the `aspect.ratio`
-As described above, the `polygonplot` function return a `ggplot2` object. 
-If you are going to change the theme of the returned ggplot object, it is
-strongly recommended to specify in the `theme` function the `aspect.ratio = 1` in 
-order to keep the text and the relative ticks aligned on the axis.
+
+Since `polygonPlot` returns a `ggplot2` object, the aspect ratio must be fixed to preserve the geometry of the polygon.  
+When applying a custom theme, always include `theme(aspect.ratio = 1)` to maintain alignment between axes and labels.
 
 ```{r fig.width=7, fig.height=7}
-plot_pentagon <- polygonplot(df, shape = 5, fillcolor = "#c89f9c", linecolor = "#b36a5e")
+plot_pentagon <- polygonPlot(df, shape = 5, fillcolor = "#c89f9c", linecolor = "#b36a5e")
 plot_pentagon + theme_bw() + theme(aspect.ratio = 1)
 ```
+
+
+### Overlay multiple polygons in one figure
+To perform this task, the polygons must be pre-generated, each sharing the same minimum and maximum values of the axes.
+This ensures that all polygons are drawn on a consistent scale, allowing for direct and meaningful visual comparison between datasets.
+
+```{r}
+# Definiamo i limiti comuni per ogni colonna
+axis_min <- c(-300, -4, 0, 0, NA, -0.5)
+axis_max <- c(500, 14, 1000, 50, NA, 0.5)
+
+# Primo dataframe
+df1 <- data.frame(
+  info   = c("axis_min", "axis_max", "data", "data", "data"),
+  data1  = c(axis_min[1], axis_max[1], 300, 460, 120),
+  data2  = c(axis_min[2], axis_max[2], -2, 12, 4),
+  data3  = c(axis_min[3], axis_max[3], 10, 270, 80),
+  data4  = c(axis_min[4], axis_max[4], 20, 40, 15),
+  data5  = c(axis_min[5], axis_max[5], 5, 10, 3),
+  data6  = c(axis_min[6], axis_max[6], 0.1, 0.3, -0.2)
+)
+
+# Secondo dataframe (stessi axis_min e axis_max ma dati diversi)
+df2 <- data.frame(
+  info   = c("axis_min", "axis_max", "data", "data", "data"),
+  data1  = c(axis_min[1], axis_max[1], 250, 380, 490),
+  data2  = c(axis_min[2], axis_max[2], -3, 8, 10),
+  data3  = c(axis_min[3], axis_max[3], 30, 200, 850),
+  data4  = c(axis_min[4], axis_max[4], 10, 30, 45),
+  data5  = c(axis_min[5], axis_max[5], 2, 6, 8),
+  data6  = c(axis_min[6], axis_max[6], -0.1, 0.25, 0.4)
+)
+
+df1
+
+df2
+
+
+
+```
+
+
+```{r}
+p1 <- polygonPlot(df1, shape=4, fillcolor = "darkgreen", alpha=0.5, linecolor = "darkgreen", mean_line_color = "blue")
+
+p1
+```
+
+
+```{r}
+p2 <- polygonPlot(df2, shape=4, fillcolor = "orange", alpha=0.5, linecolor = "orange", mean_line_color = "red")
+
+p2
+```
+
+
+Now that we have created the two plots, we can overlay them in a single chart.
+To do this, we need to define:
+- a list containing the plots
+- the corresponding labels
+
+The parameters for the `overlay_polygons` function are:
+
+* __`plot_list`__ a list of polygon plots (ggplot2 objects). All plots should use the same axis ranges. The order of plots in this list determines which polygons appear in the foreground and which are in the background.
+* __`label_list`__ is a vector of strings. Must have the same length of `plot_list` object
+* __`legend_title`__ title of the legend
+* __`include_mean_lines`__ logical flag indicating whether to include mean lines in the overlaid polygons
+
+```{r}
+plt_list <- list(p1,p2)
+plt_labels <- c("Example1", "Example2")
+
+overlay_polygons(plt_list, plt_labels, include_mean_lines = T)
+
+```
+
+
+
+Even with three plot we can see the differences. However, too many plots may provide a difficult visualization.
+```{r}
+
+# Limiti comuni (uguali ai precedenti)
+axis_min <- c(-300, -4, 0, 0, NA, -0.5)
+axis_max <- c(500, 14, 1000, 50, NA, 0.5)
+
+# Terzo dataframe
+df3 <- data.frame(
+  info   = c("axis_min", "axis_max", "data", "data", "data"),
+  data1  = c(axis_min[1], axis_max[1], 100, 250, 400),
+  data2  = c(axis_min[2], axis_max[2], -1, 6, 10),
+  data3  = c(axis_min[3], axis_max[3], 50, 300, 700),
+  data4  = c(axis_min[4], axis_max[4], 5, 25, 35),
+  data5  = c(axis_min[5], axis_max[5], 4, 8, 9),
+  data6  = c(axis_min[6], axis_max[6], 0.0, 0.2, 0.45)
+)
+
+p3 <- polygonPlot(df3,   shape=4, fillcolor = "dodgerblue", alpha = 0.5, linecolor = "dodgerblue", mean_line_color = "yellow")
+p3
+
+```
+
+
+```{r}
+
+plt_list <- list(p1,p2,p3)
+plt_labels <- c("Example1", "Example2", "Example3")
+
+overlay_polygons(plt_list, plt_labels, include_mean_lines = T)
+
+```
+
+
+
+
+## Citation
+Paper in preparation...
 
 
 ## `sessionInfo` {-}
@@ -182,6 +328,7 @@ plot_pentagon + theme_bw() + theme(aspect.ratio = 1)
 
 ```{r session_info, echo=FALSE, cache=FALSE}
 Sys.time()
+Sys.Date()
 sessionInfo()
 ```
 
