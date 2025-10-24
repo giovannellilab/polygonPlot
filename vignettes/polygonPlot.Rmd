@@ -211,11 +211,9 @@ To perform this task, the polygons must be pre-generated, each sharing the same 
 This ensures that all polygons are drawn on a consistent scale, allowing for direct and meaningful visual comparison between datasets.
 
 ```{r}
-# Definiamo i limiti comuni per ogni colonna
 axis_min <- c(-300, -4, 0, 0, NA, -0.5)
 axis_max <- c(500, 14, 1000, 50, NA, 0.5)
 
-# Primo dataframe
 df1 <- data.frame(
   info   = c("axis_min", "axis_max", "data", "data", "data"),
   data1  = c(axis_min[1], axis_max[1], 300, 460, 120),
@@ -226,7 +224,6 @@ df1 <- data.frame(
   data6  = c(axis_min[6], axis_max[6], 0.1, 0.3, -0.2)
 )
 
-# Secondo dataframe (stessi axis_min e axis_max ma dati diversi)
 df2 <- data.frame(
   info   = c("axis_min", "axis_max", "data", "data", "data"),
   data1  = c(axis_min[1], axis_max[1], 250, 380, 490),
@@ -246,14 +243,14 @@ df2
 ```
 
 
-```{r}
+```{r fig.width=7, fig.height=7}
 p1 <- polygonPlot(df1, shape=4, fillcolor = "darkgreen", alpha=0.5, linecolor = "darkgreen", mean_line_color = "blue")
 
 p1
 ```
 
 
-```{r}
+```{r fig.width=7, fig.height=7}
 p2 <- polygonPlot(df2, shape=4, fillcolor = "orange", alpha=0.5, linecolor = "orange", mean_line_color = "red")
 
 p2
@@ -272,7 +269,7 @@ The parameters for the `overlay_polygons` function are:
 * __`legend_title`__ title of the legend
 * __`include_mean_lines`__ logical flag indicating whether to include mean lines in the overlaid polygons
 
-```{r}
+```{r fig.width=7, fig.height=7}
 plt_list <- list(p1,p2)
 plt_labels <- c("Example1", "Example2")
 
@@ -283,9 +280,7 @@ overlay_polygons(plt_list, plt_labels, include_mean_lines = T)
 
 
 Even with three plot we can see the differences. However, too many plots may provide a difficult visualization.
-```{r}
-
-# Limiti comuni (uguali ai precedenti)
+```{r fig.width=7, fig.height=7}
 axis_min <- c(-300, -4, 0, 0, NA, -0.5)
 axis_max <- c(500, 14, 1000, 50, NA, 0.5)
 
@@ -306,7 +301,7 @@ p3
 ```
 
 
-```{r}
+```{r fig.width=7, fig.height=7}
 
 plt_list <- list(p1,p2,p3)
 plt_labels <- c("Example1", "Example2", "Example3")
@@ -314,8 +309,6 @@ plt_labels <- c("Example1", "Example2", "Example3")
 overlay_polygons(plt_list, plt_labels, include_mean_lines = T)
 
 ```
-
-
 
 
 ## Citation
