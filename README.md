@@ -1,6 +1,7 @@
 
 # polygonPlot
 
+[![DOI](https://zenodo.org/badge/367626518.svg)](https://doi.org/10.5281/zenodo.17977579)
 [![R-CMD-check](https://github.com/giovannellilab/polygonPlot/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovannellilab/polygonPlot/actions/workflows/R-CMD-check.yaml)
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
